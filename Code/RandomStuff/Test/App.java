@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.Scanner;
 
 public class App {
@@ -18,6 +17,19 @@ public class App {
         // * scanner.next().charAt(0) > Char
         // * scanner.nextDouble() > Double
         // * scanner.nextLong() > Long
+        // * scanner.nextBoolean() > Boolean
+
+
+        // * But what if we use scanner.nextInt() and the next value isn't an integer
+        // * It throws an Exception :V
+        // * So ...
+        // * 
+        // * This next methods return a boolean for each case
+        // * scanner.hasNextBoolean()
+        // * scanner.hasNextInt()
+        // * scanner.hasNextFloat()
+        // * scanner.hasNextDouble()
+        // * scanner.hasNextLong()
 
         System.out.println(number);
     }
