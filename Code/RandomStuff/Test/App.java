@@ -32,5 +32,6 @@ public class App {
         // * scanner.hasNextLong()
 
         System.out.println(number);
+        sc.close();
     }
 }
