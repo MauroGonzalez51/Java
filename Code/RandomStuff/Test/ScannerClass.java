@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
-public class App {
+public class ScannerClass {
+    
     public static void main(String[] args) throws Exception {
         // * Testing the scanner stuff, this way is "easier" to input values
 
-        // This is the way to setup the scanner class > Yep, it's a class
+        // ! This is the way to setup the scanner class > Yep, it's a class
+        // ! But, aparently this is not a pointer :O
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Ingrese un numero: ");
@@ -13,6 +15,7 @@ public class App {
         Integer number = sc.nextInt();
 
         // * scanner.nextLine() > String's
+        // *        scanner.next() > This way the \n isn't taken by the previos input
         // * scanner.nextInt() > Integers
         // * scanner.next().charAt(0) > Char
         // * scanner.nextDouble() > Double
