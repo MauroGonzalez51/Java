@@ -18,6 +18,7 @@ public class ScannerClass {
         // *        scanner.next() > This way the \n isn't taken by the previos input
         // * scanner.nextInt() > Integers
         // * scanner.next().charAt(0) > Char
+        // * scanner.nextFloat() > Float
         // * scanner.nextDouble() > Double
         // * scanner.nextLong() > Long
         // * scanner.nextBoolean() > Boolean
