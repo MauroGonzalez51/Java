@@ -1,6 +1,9 @@
 package Code.RandomStuff.BankManagement;
 
 import java.util.Scanner;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 public class BankAccount {
     private double userBalance = 0;
@@ -8,8 +11,8 @@ public class BankAccount {
     private String customerID;
 
     public BankAccount(String userName, String userID) {
-        this.customerName = userName.toString();
-        this.customerID = userID.toString();
+        this.customerName = userName;
+        this.customerID = userID;
     }
 
     public void depositMoney(double amount) {
@@ -35,11 +38,9 @@ public class BankAccount {
         System.out.println();
     }
 
-
-
-    public void mainMenu() {
-        Integer optionIngresed = 4;
+    public void mainMenu() throws IOException {
         Scanner scanner = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Bienvenid@, " + this.customerName);
         System.out.println("ID: " + this.customerID);
@@ -50,68 +51,62 @@ public class BankAccount {
         System.out.println("3) Retirar Dinero");
         System.out.println("4) Salir");
 
+        String optionIngresed;
         do {
             this.printLineInConsole(30);
-            do {
-                System.out.print("Ingrese una opcion: ");
-                if (scanner.hasNextInt()) {
-                    optionIngresed = scanner.nextInt();
-                    break;
-                } else {
-                    System.out.println("Error: La opcion ingresada debe ser un numero"); 
-                    break; // * {/*      */}
-                }
-            } while (true);
-
             
-        //     switch (optionIngresed) {
-        //         case 1: {
-        //             this.printLineInConsole(20);
-        //             System.out.println("Balance Actual: " + this.userBalance);
-        //             break;
-        //         }
+            System.out.print("Ingrese una opcion: ");
+            optionIngresed = br.readLine();
+            
+            switch (optionIngresed) {
+                case "1": {
+                    this.printLineInConsole(20);
+                    System.out.println("Balance Actual: " + this.userBalance);
+                    break;
+                }
 
-        //         case 2: {
-        //             this.printLineInConsole(20);
+                case "2": {
+                    this.printLineInConsole(20);
 
-        //             double tempValue = 0.0;
-        //             do {
-        //                 System.out.print("Digite la cantidad de dinero a ingresar: ");
-        //                 if (scanner.hasNextDouble()) {
-        //                     tempValue = scanner.nextDouble();
-        //                     break;
-        //                 } else System.out.println("Error: El valor ingresado debe ser un numero");
+                    double tempValue = 0.0;
+                    do {
+                        System.out.print("Digite la cantidad de dinero a ingresar: ");
+                        if (scanner.hasNextDouble()) {
+                            tempValue = scanner.nextDouble();
+                            break;
+                        } else System.out.println("Error: El valor ingresado debe ser un numero");
 
-        //             } while (true);
+                    } while (true);
 
-        //             this.depositMoney(tempValue);
-        //             break;
-        //         }
+                    this.depositMoney(tempValue);
+                    break;
+                }
 
-        //         case 3: {
-        //             this.printLineInConsole(20);
+                case "3": {
+                    this.printLineInConsole(20);
 
-        //             double tempValue = 0.0;
-        //             do {
-        //                 System.out.print("Digite la cantidad de dinero a retirar: ");
-        //                 if (scanner.hasNextDouble()) {
-        //                     tempValue = scanner.nextDouble();
-        //                     break;
-        //                 } else System.out.println("Error: El valor ingresado debe ser un numero");
-        //             } while (true);
+                    double tempValue = 0.0;
+                    do {
+                        System.out.print("Digite la cantidad de dinero a retirar: ");
+                        if (scanner.hasNextDouble()) {
+                            tempValue = scanner.nextDouble();
+                            break;
+                        } else System.out.println("Error: El valor ingresado debe ser un numero");
+                    } while (true);
 
-        //             System.out.println("Resultado de la operacion: " + this.retireMoney(tempValue));
-        //             break;
-        //         }
+                    System.out.println("Resultado de la operacion: " + this.retireMoney(tempValue));
+                    break;
+                }
 
-        //         default: {
-        //             System.out.println("Ingrese una opcion correcta para continuar");
-        //             break;
-        //         }
-        //     }
+                default: {
+                    System.out.println("Ingrese una opcion correcta para continuar");
+                    break;
+                }
+            }
 
-            if (optionIngresed == 4) break;
+            if (optionIngresed.equals("4")) break;
 
         } while (true);
+        scanner.close();
     }
 }
