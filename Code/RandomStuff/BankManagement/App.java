@@ -1,9 +1,6 @@
 package Code.RandomStuff.BankManagement;
 
-import java.util.Scanner;
-
 import Code.RandomStuff.BankManagement.BankAccount;
-
 import Code.RandomStuff.BankManagement.User;
 
 public class App {

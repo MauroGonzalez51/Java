@@ -38,9 +38,58 @@ public class BankAccount {
         System.out.println();
     }
 
+    public void caseChecker(final String optionIngresed) {
+        Scanner scanner = new Scanner(System.in);
+        switch (optionIngresed) {
+            case "1": {
+                this.printLineInConsole(20);
+                System.out.println("Balance Actual: " + this.userBalance);
+                break;
+            }
+
+            case "2": {
+                this.printLineInConsole(20);
+
+                double tempValue = 0.0;
+                do {
+                    System.out.print("Digite la cantidad de dinero a ingresar: ");
+                    if (scanner.hasNextDouble()) {
+                        tempValue = scanner.nextDouble();
+                        break;
+                    } else System.out.println("Error: El valor ingresado debe ser un numero");
+
+                } while (true);
+
+                this.depositMoney(tempValue);
+                break;
+            }
+
+            case "3": {
+                this.printLineInConsole(20);
+
+                double tempValue = 0.0;
+                do {
+                    System.out.print("Digite la cantidad de dinero a retirar: ");
+                    if (scanner.hasNextDouble()) {
+                        tempValue = scanner.nextDouble();
+                        break;
+                    } else System.out.println("Error: El valor ingresado debe ser un numero");
+                } while (true);
+
+                System.out.println("Resultado de la operacion: " + this.retireMoney(tempValue));
+                break;
+            }
+
+            default: {
+                System.out.println("Ingrese una opcion correcta para continuar");
+                break;
+            }
+        }
+        scanner.close();
+    }
+
     public void mainMenu() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         System.out.println("Bienvenid@, " + this.customerName);
         System.out.println("ID: " + this.customerID);
@@ -56,53 +105,9 @@ public class BankAccount {
             this.printLineInConsole(30);
             
             System.out.print("Ingrese una opcion: ");
-            optionIngresed = br.readLine();
+            optionIngresed = scanner.next();
             
-            switch (optionIngresed) {
-                case "1": {
-                    this.printLineInConsole(20);
-                    System.out.println("Balance Actual: " + this.userBalance);
-                    break;
-                }
-
-                case "2": {
-                    this.printLineInConsole(20);
-
-                    double tempValue = 0.0;
-                    do {
-                        System.out.print("Digite la cantidad de dinero a ingresar: ");
-                        if (scanner.hasNextDouble()) {
-                            tempValue = scanner.nextDouble();
-                            break;
-                        } else System.out.println("Error: El valor ingresado debe ser un numero");
-
-                    } while (true);
-
-                    this.depositMoney(tempValue);
-                    break;
-                }
-
-                case "3": {
-                    this.printLineInConsole(20);
-
-                    double tempValue = 0.0;
-                    do {
-                        System.out.print("Digite la cantidad de dinero a retirar: ");
-                        if (scanner.hasNextDouble()) {
-                            tempValue = scanner.nextDouble();
-                            break;
-                        } else System.out.println("Error: El valor ingresado debe ser un numero");
-                    } while (true);
-
-                    System.out.println("Resultado de la operacion: " + this.retireMoney(tempValue));
-                    break;
-                }
-
-                default: {
-                    System.out.println("Ingrese una opcion correcta para continuar");
-                    break;
-                }
-            }
+            caseChecker(optionIngresed);
 
             if (optionIngresed.equals("4")) break;
 
