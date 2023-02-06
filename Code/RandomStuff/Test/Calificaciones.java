@@ -16,11 +16,8 @@ import java.util.Scanner;
 public class Calificaciones {
     public static void ArraysVersion(Integer grade) {
         String valoracion[] = {"Insuficiente", "Deficiente", "Regular", "Buena", "Excelente"};
-        try {
-            System.out.println(valoracion[grade - 1]);
-        } catch (Exception e) {
-            System.out.println("Ingrese un valor valido: " + e);
-        } 
+        try { System.out.println(valoracion[grade - 1]); } 
+        catch (Exception e) { System.out.println("Ingrese un valor valido: " + e); } 
     }
     
     public static void main(String[] args) throws Exception {
