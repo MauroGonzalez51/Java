@@ -17,6 +17,11 @@ public class Factorial {
         return returnValue;
     }
 
+    public static Integer factorialRecursion(Integer valueIngresed) {
+        if (valueIngresed <= 1) return 1;
+        else return (valueIngresed * factorialRecursion(valueIngresed - 1));
+    }
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         Integer valueIngresed = 0;
@@ -28,6 +33,7 @@ public class Factorial {
             } else System.out.println("Ingrese un valor valido");
         } while (valueIngresed < 1);
         System.out.println("Factorial: " + factorial(valueIngresed));
+        System.out.println("Factorial Recursion: " + factorialRecursion(valueIngresed));
         scanner.close();
     }    
 }
