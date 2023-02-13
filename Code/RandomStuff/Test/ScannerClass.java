@@ -1,3 +1,5 @@
+package Code.RandomStuff.Test;
+
 import java.util.Scanner;
 
 public class ScannerClass {
