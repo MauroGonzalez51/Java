@@ -1,5 +1,8 @@
 package Code.RandomStuff.Test.Constructores;
 
+import java.util.Scanner;
+import java.util.ArrayList;
+
 public class Date {
     private Integer day, month, year;
     
@@ -19,6 +22,22 @@ public class Date {
         this.day = Integer.parseInt(day);
         this.month = Integer.parseInt(month);
         this.year = Integer.parseInt(year);
+    }
+
+    // * Prototype (day/month/year)
+    public Date(String date) {
+        Scanner scanner = new Scanner(date);
+        scanner.useDelimiter("/");
+        ArrayList <String> dateParts = new ArrayList <String>();
+
+        while (scanner.hasNext()) {
+            dateParts.add(scanner.next());
+        }
+
+        this.day = Integer.parseInt(dateParts.get(0));
+        this.month = Integer.parseInt(dateParts.get(1));
+        this.year = Integer.parseInt(dateParts.get(2));
+        scanner.close();
     }
 
     // ! ---------- Getters ----------|>
