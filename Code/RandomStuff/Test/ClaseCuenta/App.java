@@ -16,8 +16,6 @@ public class App {
 
         Cuenta userAccount = new Cuenta(askBalance);
 
-        System.out.println(userAccount.getBalance());
-
         userAccount.accountDashboard();
         
         scanner.close();
