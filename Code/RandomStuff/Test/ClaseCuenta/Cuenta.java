@@ -70,20 +70,8 @@ public class Cuenta {
         return returnMessage;
     }
 
-    public void accountDashboard() {
+    private void checkCases(String optionIngresed) {
         Scanner scanner = new Scanner(System.in);
-       
-        System.out.println("Acciones de la cuenta");
-        System.out.println("1. Ver saldo actual");
-        System.out.println("2. Agregar saldo");
-        System.out.println("3. Retirar saldo");
-        System.out.println("4. Salir");
-
-        String optionIngresed = "";
-
-        System.out.print("-> ");
-        optionIngresed = scanner.next();
-        
         switch (optionIngresed) {
             case "1": {
                 System.out.format("Saldo actual: %s%n", this.getBalance());
@@ -112,6 +100,26 @@ public class Cuenta {
                 System.exit(0);
         
         }
+    }
+
+    public void accountDashboard() {
+        Scanner scanner = new Scanner(System.in);
+       
+        String optionIngresed = "";
+        do {
+            System.out.println();
+            System.out.println("Acciones de la cuenta");
+            System.out.println("1. Ver saldo actual");
+            System.out.println("2. Agregar saldo");
+            System.out.println("3. Retirar saldo");
+            System.out.println("4. Salir");
+    
+    
+            System.out.print("-> ");
+            optionIngresed = scanner.next();
+
+            this.checkCases(optionIngresed);
+        } while (!optionIngresed.equals("4")); 
     }
 
 }
