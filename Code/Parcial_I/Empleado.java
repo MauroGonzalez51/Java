@@ -19,6 +19,11 @@ public class Empleado {
         this.calcularSalarioBase();
     }
 
+    public Empleado() {
+        this.nombreEmpleado = "";
+        this.horasTrabajadas = 0;
+    }
+
     public void calcularSalarioBase() { this.sueldoBase = this.salarioBase * this.horasTrabajadas; }
 
     public void llenarDatos(Integer n) {
@@ -33,6 +38,8 @@ public class Empleado {
 
         System.out.format("[%d] Ingrese el salario base del empleado: ", n + 1);
         if (this.scanner.hasNextDouble()) this.salarioBase = this.scanner.nextDouble();
+
+        this.calcularSalarioBase();
     }
 
 

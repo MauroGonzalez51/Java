@@ -31,4 +31,8 @@ public class Nomina extends Fecha {
 
         if (!empleadoEncontrado) { System.out.format("Datos del empleado no encontrados [%s]", nombreEmpleadoBuscar); }
     }
+
+    public void imprimirNomina() {
+        System.out.format("Nombre empresa: [%s] %n NIT: [%s] %n", this.nombreEmpresa, this.NIT);
+    }
 }
