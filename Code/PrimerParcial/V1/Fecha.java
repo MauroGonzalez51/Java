@@ -1,4 +1,4 @@
-package Code.Parcial_I_V1;
+package Code.PrimerParcial.V1;
 
 import java.util.Scanner;
 import java.util.ArrayList;

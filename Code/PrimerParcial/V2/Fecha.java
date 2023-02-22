@@ -1,4 +1,4 @@
-package Code.Parcial_I_V2;
+package Code.PrimerParcial.V2;
 
 import java.util.Scanner;
 

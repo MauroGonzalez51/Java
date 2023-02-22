@@ -1,4 +1,4 @@
-package Code.Parcial_I;
+package Code.PrimerParcial.V1;
 
 public class Nomina extends Fecha {
     private String nombreEmpresa;
