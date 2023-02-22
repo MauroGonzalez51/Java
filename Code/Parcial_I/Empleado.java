@@ -20,28 +20,22 @@ public class Empleado {
     }
 
     public Empleado() {
-        this.nombreEmpleado = "";
-        this.horasTrabajadas = 0;
-    }
-
-    public void calcularSalarioBase() { this.sueldoBase = this.salarioBase * this.horasTrabajadas; }
-
-    public void llenarDatos(Integer n) {
         System.out.format("[%d] Ingrese el nombre del empleado: ", n + 1);
         if (this.scanner.hasNext()) this.nombreEmpleado = this.scanner.next();
-
+    
         System.out.format("[%d] Ingrese la cantidad de horas trabajadas: ", n + 1);
         if (this.scanner.hasNextInt()) this.horasTrabajadas = this.scanner.nextInt();
-
+    
         System.out.format("[%d] Ingrese la edad del empleado: ", n +1);
         if (this.scanner.hasNextInt()) this.edad = this.scanner.nextInt();
-
+    
         System.out.format("[%d] Ingrese el salario base del empleado: ", n + 1);
         if (this.scanner.hasNextDouble()) this.salarioBase = this.scanner.nextDouble();
-
+    
         this.calcularSalarioBase();
     }
 
+    public void calcularSalarioBase() { this.sueldoBase = this.salarioBase * this.horasTrabajadas; }
 
     //! --------- Setters ------------->
     public void setNombreEmpleado(String nombreEmpleado) { this.nombreEmpleado = nombreEmpleado; }

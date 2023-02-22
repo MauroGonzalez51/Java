@@ -5,10 +5,40 @@ public class Nomina extends Fecha {
     private String NIT;
     private Empleado[] empleados = new Empleado[5];
 
+    public Nomina(Integer day, Integer month, Integer year) {
+        super(day, month, year);
+        this.llenarDatosEmpresa();
+        this.registrarEmpleados();
+    }
+
+    public Nomina(String day, String month, String year) {
+        super(day, month, year);
+        this.llenarDatosEmpresa();
+        this.registrarEmpleados();
+    }
+
+    public Nomina(String date) {
+        super(date);
+        this.llenarDatosEmpresa();
+        this.registrarEmpleados();
+    }
+    
+    public void llenarDatosEmpresa() {
+        System.out.println();
+    
+        System.out.format("%nIngrese el nombre de la empresa: ");
+        if (scanner.hasNext()) this.nombreEmpresa = scanner.nextLine();
+    
+        System.out.format("%nIngrese el NIT: ");
+        if (scanner.hasNext()) this.NIT = scanner.next();
+    }
+
     public void registrarEmpleados() {
         for (Integer i = 0; i < empleados.length; i++) {
-            empleados[i].llenarDatos(i);
+            // empleados[i].llenarDatos(i);
+            empleados[i] = new Empleado();
         }
+
     } 
 
     public void datosEmpleado(Integer i) {
