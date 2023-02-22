@@ -10,21 +10,25 @@ public class Nomina extends Fecha {
             empleados[i].llenarDatos(i);
         }
     } 
+
+    public void datosEmpleado(Integer i) {
+        System.out.format("Empleado [%d]%n", i + 1);
+        System.out.format("Nombre del empleado: %s%n", empleados[i].getNombreEmpleado());
+        System.out.format("Horas trabajadas: %d%n", empleados[i].getHorasTrabajadas());
+        System.out.format("Edad: %d$n", empleados[i].getEdad());
+        System.out.format("Salario base: %f%n", empleados[i].getSalarioBase());
+        System.out.format("Sueldo base: %f%n", empleados[i].getSueldoBase());
+    }
     
     public void buscarEmpleado() {
         System.out.format("Ingrese el nombre del empleado que desea buscar: ");
         String nombreEmpleadoBuscar = this.scanner.nextLine();
 
         Boolean empleadoEncontrado = false;
-        for (Integer i = 0; i < empleados.length; i++) {
-            if (nombreEmpleadoBuscar.equals(empleados[i].getNombreEmpleado())) {
-                System.out.format("Datos encontrados");
-                System.out.format("Nombre del empleado: %s%n", empleados[i].getNombreEmpleado());
-                System.out.format("Horas trabajadas: %d%n", empleados[i].getHorasTrabajadas());
-                System.out.format("Edad: %d$n", empleados[i].getEdad());
-                System.out.format("Salario base: %f%n", empleados[i].getSalarioBase());
-                System.out.format("Sueldo base: %f%n", empleados[i].getSueldoBase());
-
+        for (Integer i = 0; i < this.empleados.length; i++) {
+            if (nombreEmpleadoBuscar.equalsIgnoreCase(empleados[i].getNombreEmpleado())) {
+                System.out.format("Datos del empleado encontrado: %n");
+                this.datosEmpleado(i);
                 empleadoEncontrado = true;
             }
         }
@@ -34,5 +38,9 @@ public class Nomina extends Fecha {
 
     public void imprimirNomina() {
         System.out.format("Nombre empresa: [%s] %n NIT: [%s] %n", this.nombreEmpresa, this.NIT);
+
+        System.out.format("Imprimiendo los datos de los empleados: %n");
+
+        for (Integer i = 0; i < this.empleados.length; i++) { this.datosEmpleado(i); }
     }
 }
