@@ -1,92 +1,57 @@
 package Code.PrimerParcial.V2;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
-    public static void caseHandler(String optionIngresed, Nomina nomina) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            switch (optionIngresed) {
-                case "1": {
-                    if (nomina.fecha == null) { 
-                        System.out.format("%nNo hay datos de fecha registrados%n"); 
-                        System.out.format("Procediento a agregarlos [...]%n");
-                        nomina.datosFecha();
-                    } else {
-                        System.out.format("Datos de fecha registrados en el sistema: [%s]%n", nomina.fecha.dateFormat());
-
-                        System.out.format("Desea modificarlos (Si/no)? %n");
-                        System.out.format("-> ");
-                        String tempOptionIngresed = (scanner.hasNext()) ? scanner.next() : "No";
-
-                        if (tempOptionIngresed.equalsIgnoreCase("Si")) nomina.datosFecha();
-                    }
-
-                    break;
-                }
-                
-                case "2": {
-                    System.out.format("%nDesea modificar los datos de [Nomina] (Si/No)? %n");
-                    System.out.format("-> ");
-                    String tempOptionIngresed = (scanner.hasNext()) ? scanner.next() : "No";
-
-                    if (tempOptionIngresed.equalsIgnoreCase("Si")) nomina = new Nomina();
-
-                    break;
-                }
-                case "3": { nomina.llenarDatosEmpleados(); break; }
-
-                case "4": {
-                    String employerName = "";
-
-                    do {
-                        System.out.format("%nIngrese el nombre del empleado a buscar: ");
-                        employerName = (scanner.hasNext()) ? scanner.next() : "";
-                    } while (employerName.isEmpty());
-
-                    nomina.buscarEmpleado(employerName);
-
-                    break;
-                }
-
-                default:
-                    System.exit(0);
-            }
-        } 
+    private static void printlnInConsole(Integer amountOfCaracters) {
+        System.out.println();
+        for (Integer i = 0; i < amountOfCaracters; i++)
+            System.out.print("- ");
+        System.out.println();
     }
 
-    public static void mainMenu(Nomina nomina) throws IOException {
-        String optionIngresed = "";
+    public static void defaultLaunchOrder(Nomina nomina) {
+        printlnInConsole(25);
+        System.out.format("[1] Ingresando los datos de nomina%n");
+        nomina = new Nomina();
 
+        printlnInConsole(25);
+        System.out.format("%n[2] Fecha de liquidacion%n");
+        nomina.datosFecha();
+
+        printlnInConsole(25);
+        System.out.format("%n[3] Ingresando los datos de los empleados%n");
+        nomina.llenarDatosEmpleados();
+
+        printlnInConsole(25);
+        String buscarEmpleado = "";
         try (Scanner scanner = new Scanner(System.in)) {
             do {
-                System.out.println();
-    
-                System.out.format("1. (Agregar/Modificar) fecha de luquidacion%n");
-                System.out.format("2. (Agregar/Modificar) datos de la nomina%n");
-                System.out.format("3. (Agregar/Modificar) datos de los empleados%n");
-                System.out.format("4. Buscar un empleado%n");
-                System.out.format("5. Ver todos los datos guardados%n");
-                System.out.format("6. Salir%n");
-    
-                System.out.format("-> ");
-                if (scanner.hasNext()) optionIngresed = scanner.next();
+                System.out.format("%nDesea buscar los datos de un empleado (Si/No)? ");
+                buscarEmpleado = (scanner.hasNext()) ? scanner.next() : "";
+            } while (buscarEmpleado.isEmpty());
 
-                caseHandler(optionIngresed, nomina);
-
-                if (optionIngresed.equals("6")) break;
-            } while (true);
+            if (buscarEmpleado.equalsIgnoreCase("Si")) {
+                String nombreEmpleadoBuscar = "";
+    
+                System.out.format("%nIngrese el nombre del empleado a buscar: ");
+                nombreEmpleadoBuscar = (scanner.hasNext()) ? scanner.next() : "";
+            
+                nomina.buscarEmpleado(nombreEmpleadoBuscar);
+            }           
         }
+
+        printlnInConsole(25);
+        System.out.format("%nImprimiendo todos los datos de la nomina%n%n");
+        nomina.imprimirNomina();
     }
 
-    public static void main(String[] args) throws IOException {
-        Nomina nomina = new Nomina();
-        mainMenu(nomina);
-        // nomina.datosFecha();
-        // nomina.llenarDatosEmpleados();
-        // nomina.buscarEmpleado();
+    public static void main(String[] args) {
+        System.out.flush();
+        System.out.format("%nClase Nomina%n%n");
 
-        // nomina.imprimirNomina();
-
+        System.out.format("Lanzando el programa en orden por defecto%n%n");
+        Nomina nomina = null;
+        defaultLaunchOrder(nomina);
     }
-}
+}        

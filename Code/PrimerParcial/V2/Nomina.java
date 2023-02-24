@@ -7,6 +7,7 @@ public class Nomina {
     private String nombreEmpresa;
     private String NIT;
 
+    // ------- While testing, change the value below ----- |>
     private Integer cantidadEmpleados = 1;
 
     public ArrayList <Empleado> empleados = new ArrayList <Empleado>();
@@ -30,19 +31,19 @@ public class Nomina {
 
     public void llenarDatosEmpleados() {
         for (Integer i = 0; i < cantidadEmpleados; i++)
-            this.empleados[i] = new Empleado(i);
+            this.empleados.add(new Empleado(i));
     }
 
     public void datosFecha() { this.fecha = new Fecha(); }
 
-    public void datosEmpleados(Integer n) {
+    private void datosEmpleados(Integer n) {
         System.out.println();
 
         System.out.format("Datos del empleado [%d]%n", n + 1);
-        System.out.format("Nombre del empleado: %s%n", empleados[n].getNombreEmpleado());
-        System.out.format("Horas trabajadas:  %d%n", empleados[n].getHorasTrabajadas());
-        System.out.format("Edad: %d%n", empleados[n].getEdadEmpleado());
-        System.out.format("Sueldo total: %f%n", empleados[n].getSueldoTotal());
+        System.out.format("Nombre del empleado: %s%n", empleados.get(n).getNombreEmpleado());
+        System.out.format("Horas trabajadas:  %d%n", empleados.get(n).getHorasTrabajadas());
+        System.out.format("Edad: %d%n", empleados.get(n).getEdadEmpleado());
+        System.out.format("Sueldo total: %f%n", empleados.get(n).getSueldoTotal());
     }
 
     public void buscarEmpleado(String empleadoBuscar) {
@@ -50,8 +51,8 @@ public class Nomina {
         Boolean datosEncontrados = false;
 
         if (this.empleados != null) {
-            for (Integer i = 0; i < this.empleados.length; i++) {
-                if (this.empleados[i].getNombreEmpleado().equalsIgnoreCase(empleadoBuscar)) {
+            for (Integer i = 0; i < this.empleados.size(); i++) {
+                if (this.empleados.get(i).getNombreEmpleado().equalsIgnoreCase(empleadoBuscar)) {
                     datosEncontrados = !datosEncontrados;
                     datosEmpleados(i);
                 }
@@ -62,14 +63,12 @@ public class Nomina {
     }
 
     public void imprimirNomina() {
-        System.out.println();
-
         System.out.format("Nombre de la empresa: %s%n", this.nombreEmpresa);
         System.out.format("NIT de la empresa: %s%n", this.NIT);
 
         System.out.format("%nDatos de los empleados [...] %n");
 
-        for (Integer i = 0; i < empleados.length; i++) 
+        for (Integer i = 0; i < empleados.size(); i++) 
             this.datosEmpleados(i);
     }
 }
