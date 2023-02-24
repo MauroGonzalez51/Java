@@ -1,11 +1,16 @@
 package Code.PrimerParcial.V2;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Nomina {
     private String nombreEmpresa;
     private String NIT;
-    private Empleado[] empleados = new Empleado[1];
+
+    private Integer cantidadEmpleados = 1;
+
+    public ArrayList <Empleado> empleados = new ArrayList <Empleado>();
+    public Fecha fecha = null;
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -24,9 +29,11 @@ public class Nomina {
     }
 
     public void llenarDatosEmpleados() {
-        for (Integer i = 0; i < empleados.length; i++)
+        for (Integer i = 0; i < cantidadEmpleados; i++)
             this.empleados[i] = new Empleado(i);
     }
+
+    public void datosFecha() { this.fecha = new Fecha(); }
 
     public void datosEmpleados(Integer n) {
         System.out.println();
@@ -38,25 +45,20 @@ public class Nomina {
         System.out.format("Sueldo total: %f%n", empleados[n].getSueldoTotal());
     }
 
-    public void buscarEmpleado() {
-        System.out.println();
-
-        String empleadoBuscar = "";
+    public void buscarEmpleado(String empleadoBuscar) {
+        
         Boolean datosEncontrados = false;
 
-        do {
-            System.out.format("Ingrese el nombre del empleado a buscar: ");
-            empleadoBuscar = (this.scanner.hasNext()) ? this.scanner.next() : "";
-        } while (empleadoBuscar.isEmpty());
-
-        for (Integer i = 0; i < this.empleados.length; i++) {
-            if (this.empleados[i].getNombreEmpleado().equalsIgnoreCase(empleadoBuscar)) {
-                datosEncontrados = !datosEncontrados;
-                datosEmpleados(i);
+        if (this.empleados != null) {
+            for (Integer i = 0; i < this.empleados.length; i++) {
+                if (this.empleados[i].getNombreEmpleado().equalsIgnoreCase(empleadoBuscar)) {
+                    datosEncontrados = !datosEncontrados;
+                    datosEmpleados(i);
+                }
             }
-        }
-
-        if (!datosEncontrados) { System.out.format("No se encontraron datos [%s]", empleadoBuscar); }
+    
+            if (!datosEncontrados) { System.out.format("No se encontraron datos [%s]", empleadoBuscar); }
+        } else System.out.format("No se encuentras datos de [Empleado] en el sistema%n");
     }
 
     public void imprimirNomina() {
