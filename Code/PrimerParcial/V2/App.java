@@ -10,7 +10,7 @@ public class App {
         catch (Exception e) { }
     }
 
-    // ! Method to print a "line" in console : Output format : - - - - - - -
+    // ! Method to print a "line" in console ==> Output format : - - - - - - -
     private static void printlnInConsole(Integer amountOfCaracters) {
         System.out.println();
         for (Integer i = 0; i < amountOfCaracters; i++)
