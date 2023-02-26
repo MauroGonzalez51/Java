@@ -10,7 +10,7 @@ public class Nomina {
     private String NIT;
 
     // ! ------- While testing, change the value below ----- |>
-    private Integer cantidadEmpleados = 1;
+    private Integer cantidadEmpleados = 5;
 
     // * Creating an ArrayList <Object> to store the data given
     // * This way it resizes automatically and doesn't throw an IOException
