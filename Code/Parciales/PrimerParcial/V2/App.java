@@ -3,10 +3,10 @@
  *      - Mauro Alonso Gonzalez Figueroa    | T00067622
  *      - Juan Jose Jimenez Guardo          | 
  * 
- *  Published on: 
- *  https://github.com/MauroGonzalez51/Java/tree/master/Code/PrimerParcial/V2
+ *  Published on
+ *  https://github.com/MauroGonzalez51/Java/tree/master/Code/Parciales/PrimerParcial/V2
  * 
- * 
+ *  
  * 
  * 
  * 
