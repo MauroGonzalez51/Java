@@ -1,7 +1,7 @@
 /*
  * @autor's
  *      - Mauro Alonso Gonzalez Figueroa    | T00067622
- *      - Juan Jose Jimenez Guardo          | 
+ *      - Juan Jose Jimenez Guardo          | T00068278
  * 
  *  Published on
  *  https://github.com/MauroGonzalez51/Java/tree/master/Code/Parciales/PrimerParcial/V2
