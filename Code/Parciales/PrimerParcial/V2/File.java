@@ -3,32 +3,37 @@ package Code.Parciales.PrimerParcial.V2;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class File {
-    private static String getLocalDate() {
-        LocalDate today = LocalDate.now();
-        return (today.toString());
+
+    // ! Method to get the LocalDate as the name suggests
+    private static String getLocalDate() { LocalDate today = LocalDate.now(); return (today.toString()); }
+
+    // ! Method to get the LocalDate > Hours > Minutes > Seconds 
+    private static String getLocalHour() {
+        LocalTime localTime = LocalTime.now();
+        String toReturn = String.format("%s-%s-%s", localTime.getHour(), localTime.getMinute(), localTime.getSecond());
+        return toReturn;
     }
 
-    private static void writeLineInFile(String path, Integer n) throws FileNotFoundException {
-        try (PrintWriter writer = new PrintWriter(path + getLocalDate())) {
-            writer.println();
-            for (Integer i = 0; i < n; i++) 
-                writer.print("- ");
-            writer.println();
-        }
-    }
+    // ! Method that does all the WritingToFile stuff
+    public static String writeToFile(Empleado empleado, Integer i) throws FileNotFoundException {
+        String resultFolder = "Code/Parciales/PrimerParcial/V2/Files/";
 
-    public static void writeToFile(Empleado empleado, Integer i) throws FileNotFoundException {
-        String resultFolder = "Files/";
+        // * Just to count in the file ==> More visible
         Integer workerCount = 0;
 
-        try (PrintWriter writer = new PrintWriter(resultFolder + getLocalDate())) {
-            writeLineInFile(resultFolder, 44);
+        // * NameOfTheFile so the user knows in which file is the info
+        String fileNameToReturn = String.format("%s-%s", getLocalDate(), getLocalHour());
+
+        // ! Try-with-resources block :D
+        try (PrintWriter writer = new PrintWriter(resultFolder + getLocalDate() + "-" + getLocalHour() + ".txt")) {
+
+            // * And then prints everything into the file
             writer.println();
             writer.format("Datos encontrados [%s]%n", getLocalDate());
             
-            writeLineInFile(resultFolder, 25);
             writer.format("[%d]%n", workerCount + 1);
             
             writer.format("Datos del empleado [%d]%n", i + 1);
@@ -37,5 +42,7 @@ public class File {
             writer.format("Edad: %d%n", empleado.getEdadEmpleado());
             writer.format("Sueldo total: %f%n", empleado.getSueldoTotal());
         }
+
+        return fileNameToReturn;
     }
 }

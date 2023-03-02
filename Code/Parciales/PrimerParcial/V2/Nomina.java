@@ -11,7 +11,7 @@ public class Nomina {
     private String NIT;
 
     // ! ! ------- While testing, change the value below ----- |>
-    private Integer cantidadEmpleados = 5;
+    private Integer cantidadEmpleados = 1;
 
     // * Creating an ArrayList <Object> to store the data given
     // * This way it resizes automatically and doesn't throw an IOException
@@ -73,10 +73,13 @@ public class Nomina {
             for (Integer i = 0; i < this.empleados.size(); i++) {
                 // * And finally, if the 'nombreEmpleado' equals the String given
                 if (this.empleados.get(i).getNombreEmpleado().equalsIgnoreCase(empleadoBuscar)) {
-                    // * Just prints the info
                     datosEncontrados = !datosEncontrados;
-                    datosEmpleados(i);
-                    File.writeToFile(empleados.get(i), i);
+
+                    // * Callign the method to pring the info founded in a file
+                    // ! And then it shows it that the program founds somthing via console output
+                    System.out.format("%n[ INFO ] Revisar archivo [%s]%n", 
+                        File.writeToFile(empleados.get(i), i));
+                    System.out.format("[ INFO ] > Para ver los datos encontrados %n");
                 }
             }
             

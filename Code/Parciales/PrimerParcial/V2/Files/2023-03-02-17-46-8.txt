@@ -1,0 +1,8 @@
+
+Datos encontrados [2023-03-02]
+[1]
+Datos del empleado [1]
+Nombre del empleado: mAURO
+Horas trabajadas:  2385
+Edad: 235
+Sueldo total: 560475,000000

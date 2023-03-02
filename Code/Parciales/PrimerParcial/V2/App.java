@@ -79,13 +79,24 @@ public class App {
                 // * Method that does all that search of the "Empleado" thing
                 nomina.buscarEmpleado(nombreEmpleadoBuscar);
             }           
+            
+            printlnInConsole(25);
+
+            // * Flag String, just to store some UserInput
+            String flagToPrintValues = " ";
+
+            // ! Validating if the user wanna see all the info store via console
+            do {
+                // * Same do-while block for UserInput
+                System.out.format("%nImprimir todos los datos de la nomina (Si/No)?: ");
+                flagToPrintValues = (scanner.hasNext()) ? scanner.next() : "";
+            } while (flagToPrintValues.isEmpty()); 
+    
+            // * Method that prints all the info stored :D
+            // ! Plus it validates the optionIngresed
+            if (flagToPrintValues.equalsIgnoreCase("Si")) nomina.imprimirNomina();
+            else System.out.format("%n[ INFO ] Program terminated%n");
         }
-
-        printlnInConsole(25);
-        System.out.format("%nImprimiendo todos los datos de la nomina%n%n");
-
-        // * Method that prints all the info stored :D
-        nomina.imprimirNomina();
     }
 
     // ! Main method > That's it :>
@@ -100,6 +111,5 @@ public class App {
         // * Besides, this way the Object can be send as @params to any part of the code
         Nomina nomina = null;
         defaultLaunchOrder(nomina);
-        File.writeToFile(new Empleado(0), 1);
     }
 }        
