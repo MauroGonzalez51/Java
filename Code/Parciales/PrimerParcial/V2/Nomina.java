@@ -1,6 +1,7 @@
 package Code.Parciales.PrimerParcial.V2;
 
 import java.util.Scanner;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 public class Nomina {
@@ -9,7 +10,7 @@ public class Nomina {
     private String nombreEmpresa;
     private String NIT;
 
-    // ! ------- While testing, change the value below ----- |>
+    // ! ! ------- While testing, change the value below ----- |>
     private Integer cantidadEmpleados = 5;
 
     // * Creating an ArrayList <Object> to store the data given
@@ -41,7 +42,7 @@ public class Nomina {
 
     // ! Method that loops through each 'Empleado' and creates an Object
     public void llenarDatosEmpleados() {
-        for (Integer i = 0; i < cantidadEmpleados; i++)
+        for (Integer i = 0; i < this.cantidadEmpleados; i++)
             // * Each time the ArrayList is resized, and then the new 'Empleado' is added
             this.empleados.add(new Empleado(i));
     }
@@ -61,7 +62,7 @@ public class Nomina {
     }
 
     // ! Method that tryes to find an 'Empleado', using an String (name) given by the user
-    public void buscarEmpleado(String empleadoBuscar) {
+    public void buscarEmpleado(String empleadoBuscar) throws FileNotFoundException {
         
         // * Boolean > Verify if the info were found or not
         Boolean datosEncontrados = false;
@@ -75,6 +76,7 @@ public class Nomina {
                     // * Just prints the info
                     datosEncontrados = !datosEncontrados;
                     datosEmpleados(i);
+                    File.writeToFile(empleados.get(i), i);
                 }
             }
             

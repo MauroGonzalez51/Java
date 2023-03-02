@@ -15,6 +15,7 @@
 
 package Code.Parciales.PrimerParcial.V2;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class App {
@@ -34,7 +35,7 @@ public class App {
     }
 
     // ! Method who follows the given order and then launches the other classes methods
-    public static void defaultLaunchOrder(Nomina nomina) {
+    public static void defaultLaunchOrder(Nomina nomina) throws FileNotFoundException {
         printlnInConsole(25);
         System.out.format("[1] Ingresando los datos de nomina%n");
 
@@ -88,8 +89,9 @@ public class App {
     }
 
     // ! Main method > That's it :>
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         CleanOutputStream();
+
         System.out.format("%nClase Nomina%n%n");
 
         System.out.format("Lanzando el programa en orden por defecto%n%n");
@@ -98,5 +100,6 @@ public class App {
         // * Besides, this way the Object can be send as @params to any part of the code
         Nomina nomina = null;
         defaultLaunchOrder(nomina);
+        File.writeToFile(new Empleado(0), 1);
     }
 }        
