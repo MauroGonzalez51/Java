@@ -35,7 +35,7 @@ public class App {
     }
 
     // ! Method who follows the given order and then launches the other classes methods
-    public static void defaultLaunchOrder(Nomina nomina) {
+    public static void defaultLaunchOrder(Nomina nomina) throws FileNotFoundException {
         printlnInConsole(25);
         System.out.format("[1] Ingresando los datos de nomina%n");
 
