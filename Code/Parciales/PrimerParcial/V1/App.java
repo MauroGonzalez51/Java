@@ -1,4 +1,4 @@
-package Code.PrimerParcial.V1;
+package Code.Parciales.PrimerParcial.V1;
 
 class App {
     public static void main(String[] args) {
