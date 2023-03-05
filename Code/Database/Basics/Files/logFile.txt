@@ -1,0 +1,5 @@
+[ INFO ] [ 2023-03-04-22-26-42 ] Data recieved -> Sending to DataBase [ WorkerName: 6 ]
+[ INFO ] [ 2023-03-04-22-26-43 ] Data recieved -> Sending to DataBase [ WorkerName: 236 ]
+[ INFO ] [ 2023-03-04-22-26-45 ] Data recieved -> Sending to DataBase [ WorkerName: 236 ]
+[ INFO ] [ 2023-03-04-22-26-46 ] Data recieved -> Sending to DataBase [ WorkerName: 23 ]
+[ INFO ] [ 2023-03-04-22-26-47 ] Data recieved -> Sending to DataBase [ WorkerName: 523 ]
