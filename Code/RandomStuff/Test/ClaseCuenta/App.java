@@ -4,20 +4,14 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Scanner scanner = new Scanner(System.in);
-        String userOption = "";
-
         System.out.println("Clase cuenta");
+        Boolean getBalance = null;
 
-        System.out.print("Desea ingresar el saldo? (Si/No): ");
-        if (scanner.hasNext()) userOption = scanner.next();
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.format("Desea ingresar el saldo de la cuenta? (Si/No): ");
+            getBalance = (scanner.next().equalsIgnoreCase("Si")) ? true : false;
+        } catch (Exception e) { System.out.println(e.getMessage()); }
 
-        Boolean askBalance = (userOption.equalsIgnoreCase("Si")) ? true : false;
-
-        Cuenta userAccount = new Cuenta(askBalance);
-
-        userAccount.accountDashboard();
-        
-        scanner.close();
+        Cuenta userAccount = new Cuenta(getBalance);
     }
 }
