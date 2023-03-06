@@ -17,7 +17,6 @@ public class App {
         }
     }
 
-
     public static void main(String[] args) {
         // ! For testing change the value below 
         final Integer cantidadDatos = 1;
