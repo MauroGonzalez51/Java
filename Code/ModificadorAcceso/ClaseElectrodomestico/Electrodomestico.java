@@ -120,7 +120,7 @@ public class Electrodomestico {
     // ! ---------- Getters and Setters -----------------------------------------------------------------------------------------|>
 
     public Double getPrecioBase() { return this.precioBase; }
-    public String getColor() { return color; }
+    public String getColor() { return this.color; }
     public String getConsumoEnergetico() { return this.consumoEnergetico; }
     public Double getPeso() { return this.peso; }
     public Double getPrecioFinal() { return this.precioFinal; }
