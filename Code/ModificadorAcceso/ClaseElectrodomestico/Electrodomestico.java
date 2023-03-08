@@ -59,7 +59,7 @@ public class Electrodomestico {
         this.precioFinal();
     }
 
-    public void comprobarConsumoEnergetico() {
+    private void comprobarConsumoEnergetico() {
         // * Flag variable
         Boolean isValid = false;
         for (var validOption : this.validEnergy) {
@@ -76,7 +76,7 @@ public class Electrodomestico {
         if (!isValid) this.consumoEnergetico = "F";
     }
 
-    public void comprobarColor() {
+    private void comprobarColor() {
         // ! Same process as 'comprobarConsumoEnergetico()'
         Boolean isValid = false;
         for (var validOption : this.validColors) {
@@ -89,7 +89,7 @@ public class Electrodomestico {
         if (!isValid) this.color = "Blanco";
     }
 
-    public void precioFinal() {
+    private void precioFinal() {
         // * This line adds to 'precioFinal' the 'precioBase' based on the index
         // * Each 'consumoEnergetico' has an associated index with 'energyAddingCost'
         // *        1) Using .indexOf() to get the index of an element <A>
