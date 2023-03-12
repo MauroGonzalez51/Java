@@ -1,4 +1,4 @@
-package Code.RandomStuff.Herencia;
+package Code.RandomStuff.Herencia.Basics;
 
 public class App {
     public static void main(String[] args) {

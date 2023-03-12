@@ -1,4 +1,4 @@
-package Code.RandomStuff.Herencia;
+package Code.RandomStuff.Herencia.Basics;
 
 public class Parent {
     public void printSomething() { System.out.println("Hello from Parent!"); }
