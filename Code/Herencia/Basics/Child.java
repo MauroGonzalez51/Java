@@ -1,4 +1,4 @@
-package Code.RandomStuff.Herencia;
+package Code.Herencia.Basics;
 
 public class Child extends Parent {
     @Override
