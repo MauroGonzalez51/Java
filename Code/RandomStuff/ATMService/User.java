@@ -1,14 +1,17 @@
 package Code.RandomStuff.ATMService;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class User extends ATM {
+public class User implements ATM {
     private String username, password;
-    private Boolean AdminStatus = false;
+    private Boolean adminStatus = false;
 
     private Scanner scannerIn;
 
@@ -17,39 +20,30 @@ public class User extends ATM {
 
         try {
             do {
-                System.out.format("%nIngrese su nombre de usuario: ");
+                System.out.format("%nWrite your [Username]: ");
                 this.username = (this.scannerIn.hasNext()) ? this.scannerIn.next() : "";
             } while (this.username.isEmpty());
 
             do {
-                System.out.format("Ingrese su contraseña: ");
+                System.out.format("Write your [Password]: ");
                 this.password = (this.scannerIn.hasNext()) ? this.scannerIn.next() : "";
             } while (this.password.isEmpty());
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
-        this.createUserInstance(userFolderPath);
+        this.checkAdminStatus();
+
+        if (!this.adminStatus)
+            this.createUserInstance(userFolderPath);
     }
 
-    public String getUsername() {
-        return this.username;
-    }
+    public String getUsername() { return this.username; }
+    public String getPassword() { return this.password; }
+    public Boolean getAdminStatus() { return this.adminStatus; }
 
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    public void setUsername(String username) { this.username = username; }
+    public void setPassword(String password) { this.password = password; }
 
     // ! Body Methods from ATM
-
-    @Override
     public Boolean createUserInstance(final Path folderPath) throws IOException {
         boolean fileCreated = false;
         Path filePath = folderPath.resolve(this.username + ".txt");
@@ -81,4 +75,36 @@ public class User extends ATM {
         return fileCreated;
     }
 
+    public void checkAdminStatus() throws FileNotFoundException {
+        Path filePath = Paths.get("Code/RandomStuff/ATMService/Users/AdminProfiles.txt");
+
+        File file = filePath.toFile(); 
+
+        ArrayList <String> adminUsernames = new ArrayList <String>();
+        ArrayList <String> adminPasswords = new ArrayList <String>();
+
+        try (Scanner scannerFile = new Scanner(file)) {
+            while (scannerFile.hasNextLine()) {
+                String fileLine = scannerFile.nextLine();
+
+                if (!fileLine.startsWith("//")) {
+                    try (Scanner scannerLine = new Scanner(fileLine)) {
+                        scannerLine.useDelimiter(",");
+
+                        while (scannerLine.hasNext()) {
+                            adminUsernames.add(scannerLine.next());
+                            adminPasswords.add(scannerLine.next());
+                        }
+                    }
+                }
+            }
+        }
+        
+        for (Integer i = 0; i < adminUsernames.size(); i++) {
+            if (this.username.equals(adminUsernames.get(i)) && this.password.equals(adminPasswords.get(i))) {
+                this.adminStatus = true;
+                break;
+            }
+        }
+    }
 }

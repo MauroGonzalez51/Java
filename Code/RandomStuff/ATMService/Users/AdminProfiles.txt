@@ -1,0 +1,6 @@
+// The List of all the AdminProfiles
+// Lines starting with '//' will be ignored
+
+// Sintax: username,password
+
+root,1234

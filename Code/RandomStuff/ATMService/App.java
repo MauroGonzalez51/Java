@@ -11,11 +11,10 @@ public class App {
             System.out.format("%s", charOut);
     }
 
-
-
     private static void loop(final Path userFolderPath) throws IOException {
-        printlnInConsole("*", 40);
-        ATM user = new User(userFolderPath);
+        printlnInConsole("-", 40);
+
+        User user = new User(userFolderPath);
     }
 
     public static void main(String[] args) throws IOException {
