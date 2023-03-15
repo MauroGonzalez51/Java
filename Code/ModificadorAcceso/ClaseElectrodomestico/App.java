@@ -2,6 +2,7 @@ package Code.ModificadorAcceso.ClaseElectrodomestico;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class App {
     private static <T> Integer randomizeValue(List <T> dataList) {
@@ -11,7 +12,7 @@ public class App {
 
     private static Boolean randomBooleanValue() {
         List <Integer> booleanValues = List.of(0, 1);
-        return ((Boolean) booleanValues.get(randomizeValue(booleanValues)));
+        return ((booleanValues.get(randomizeValue(booleanValues)) == 1) ? true : false );
     }
 
     // private static Integer randomIntegerValue(Integer minValue, Integer maxValue) {
@@ -68,11 +69,11 @@ public class App {
             for (Integer i = 0; i < cantidadDatos; i++) {
                 String objectInstanceOf = "";
 
-                List <Integer> constuctorChoice = List.of(1, 2);
+                List <Integer> constuctorChoiceBlock = List.of(1, 2);
 
                 switch (constructorChoice.get(randomizeValue(constructorChoice))) {
                     case 1: {
-                        switch (constructorChoice.get(randomizeValue(constructorChoice))) {
+                        switch (constuctorChoiceBlock.get(randomizeValue(constuctorChoiceBlock))) {
                             case 1: {
                                 arrayElectrodomestico.add(new Lavadora());
                                 break;
@@ -88,7 +89,7 @@ public class App {
                     }
 
                     case 2: {
-                        switch (constructorChoice.get(randomizeValue(constructorChoice))) {
+                        switch (constuctorChoiceBlock.get(randomizeValue(constuctorChoiceBlock))) {
                             case 1: {
                                 arrayElectrodomestico.add(new Lavadora(
                                     randomDoubleValue(0.0, 200.0),
@@ -107,7 +108,7 @@ public class App {
                                     efficiencyValues.get(randomizeValue(efficiencyValues)),
                                     randomDoubleValue(0.0, 200.0),
                                     randomDoubleValue(0.0, 200.0),
-                                    randomBooleanValue();
+                                    randomBooleanValue()
                                 ));
                                 break;
                             }
@@ -118,9 +119,9 @@ public class App {
                 }
 
                 objectInstanceOf = (arrayElectrodomestico.get(i) instanceof Lavadora) ? "Lavadora" : "Television";
-
+                
                 // * Just showing the finalPrice
-                System.out.format("[ INFO ] Precio Final: %f%n [%s]", arrayElectrodomestico.get(i).getPrecioFinal(), objectInstanceOf);
+                System.out.format("[ INFO ] Precio Final: %f [%s]%n", arrayElectrodomestico.get(i).getPrecioFinal(), objectInstanceOf);
             }
         } 
     }
