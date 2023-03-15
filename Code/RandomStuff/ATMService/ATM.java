@@ -11,5 +11,5 @@ public interface ATM {
     public abstract void withdrawMoney();
     public abstract void showCurrentMoney();
     public abstract void addMoney();
-    public abstract Boolean deleteAccount();
+    public abstract Boolean deleteAccount(Boolean deleteAllAcounts);
 }

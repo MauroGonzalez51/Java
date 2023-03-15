@@ -45,6 +45,7 @@ public class User implements ATM {
 
     public String getUsername() { return this.username; }
     public String getPassword() { return this.password; }
+    public Double getBalance() { return this.balance; }
     public Boolean getAdminStatus() { return this.adminStatus; }
 
     public void setUsername(String username) { this.username = username; }
@@ -74,13 +75,15 @@ public class User implements ATM {
             }
 
             case "4": {
-                System.out.format("[INFO] Account Deleted: %b%n", this.deleteAccount());
+                System.out.format("[INFO] Account Deleted: %b%n", this.deleteAccount(false));
 
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException e) {}
                 break;
             }
+
+            default: System.exit(0);
         }
     }
 
@@ -218,7 +221,7 @@ public class User implements ATM {
         } catch (InterruptedException e) {}
     }
 
-    public Boolean deleteAccount() {
+    public Boolean deleteAccount(Boolean deleteAllAcounts) {
         Boolean fileDeleted = false;
         Path folderPath = Paths.get("Code/RandomStuff/ATMService/Users/");
         File userFile = folderPath.resolve(this.username + ".txt").toFile();

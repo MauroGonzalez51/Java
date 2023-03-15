@@ -18,10 +18,14 @@ public class App {
 
         if (user.getAdminStatus()) {
             System.out.format("[INFO] Switching to Admin%n");
-            
-        }
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {}
+            Admin admin = new Admin(user.getUsername(), user.getPassword(), user.getBalance());
+            admin.adminMainMenu();
+        } else 
+            user.userMainMenu();
 
-        user.userMainMenu();
     }
 
     public static void main(String[] args) throws IOException {
