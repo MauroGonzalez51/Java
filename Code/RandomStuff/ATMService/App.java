@@ -15,6 +15,13 @@ public class App {
         printlnInConsole("-", 40);
 
         User user = new User(userFolderPath);
+
+        if (user.getAdminStatus()) {
+            System.out.format("[INFO] Switching to Admin%n");
+            
+        }
+
+        user.userMainMenu();
     }
 
     public static void main(String[] args) throws IOException {

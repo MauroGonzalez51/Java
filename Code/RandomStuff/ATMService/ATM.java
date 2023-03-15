@@ -8,4 +8,8 @@ public interface ATM {
     // * So, you don't have to override the Methods (Since they aren't being inherited)
     public abstract Boolean createUserInstance(final Path folderPath) throws IOException;
     public abstract void checkAdminStatus() throws IOException;
+    public abstract void withdrawMoney();
+    public abstract void showCurrentMoney();
+    public abstract void addMoney();
+    public abstract Boolean deleteAccount();
 }
