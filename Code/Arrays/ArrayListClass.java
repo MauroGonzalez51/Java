@@ -1,8 +1,9 @@
 package Code.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class ArregloDinamico {
+public class ArrayListClass {
     // * Usando la clase ArrayList
 
     public static void main(String[] args) throws Exception {
@@ -35,7 +36,7 @@ public class ArregloDinamico {
         // ! nombreArrayList.isEmpty() > return Boolean
         
         // * Format > ArrayList <tipoDato> nombreArray = new ArrayList <tipoDato>();
-        ArrayList <Integer> names = new ArrayList <Integer>();
+        ArrayList <Integer> names = new ArrayList <>();
         names.add(1);
         names.add(2);
         names.add(3);
@@ -44,5 +45,9 @@ public class ArregloDinamico {
 
         System.out.println(names.get(0));
 
+        // *                                          * Values that are initialized with the arrayList .asList(anotherList)
+        ArrayList <Integer> numbers = new ArrayList <>(Arrays.asList(null));
+
+        // ArrayList <Integer> numbers = new ArrayList <>(Arrays.asList(1, 2, 3, 4, 5, 6, ...));
     }
 }
