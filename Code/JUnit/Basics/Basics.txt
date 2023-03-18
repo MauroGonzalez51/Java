@@ -1,0 +1,35 @@
+# JUnit
+Basically takes one piece of code is being tested by itself
+So, isolates one piece of code and verify that that piece is working correctly.
+
+
+Usually for Java, tha piece of code is going to be a Class or a Method inside a class
+
+
+
+
+To verify something, in JUnit you use an Assert statement
+
+// ! The test will pass if both of the parameters are equal
+assertEquals(@param, @param)
+
+// ! The test will only pass if both parameters are not equal
+assertNotEquals(@param, @param)
+
+// ! Evaluates to a Boolean => (Expresion.equals(true)) ? "TestPasses" : "TestFailed"
+assertTrue()
+
+// ! Do the opposite :)
+assertFalse()
+
+// ! The test only passes if the expresion is null
+assertNull()
+
+// ! The opposite :)
+assertNotNull()
+
+// ! Assert an Exception
+
+assertThrows(ExceptionClass.class, () -> {
+    codeToExecute();
+});

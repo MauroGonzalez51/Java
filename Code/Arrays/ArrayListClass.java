@@ -1,7 +1,7 @@
 package Code.Arrays;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 public class ArrayListClass {
     // * Usando la clase ArrayList
@@ -46,7 +46,7 @@ public class ArrayListClass {
         System.out.println(names.get(0));
 
         // *                                          * Values that are initialized with the arrayList .asList(anotherList)
-        ArrayList <Integer> numbers = new ArrayList <>(Arrays.asList(null));
+        // ! ArrayList <Integer> numbers = new ArrayList <>(Arrays.asList(null));
 
         // ArrayList <Integer> numbers = new ArrayList <>(Arrays.asList(1, 2, 3, 4, 5, 6, ...));
     }

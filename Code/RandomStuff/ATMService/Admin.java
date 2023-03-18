@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 class Admin implements ATM {
-    private String username, password;
+    private String username;
+    private String password;
     private Double balance;
     private Scanner scannerIn;
     private Path adminFilePath = Paths.get("Code/RandomStuff/ATMService/Users/AdminProfiles.txt");
