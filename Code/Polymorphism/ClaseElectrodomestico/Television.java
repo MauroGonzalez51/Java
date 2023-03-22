@@ -25,10 +25,9 @@ public class Television extends Electrodomestico {
     protected void precioFinal() {
         // ! When calling the SuperClass methods, Child atributes
         super.precioFinal();
-        // System.out.println(this.sintonizadorTDT);
 
-        // if (this.resolucion > 40) { addPrecioFinal(getPrecioFinal() * 0.3); }
+        if (this.resolucion > 40) { addPrecioFinal(getPrecioFinal() * 0.3); }
         
-        // if (this.sintonizadorTDT) { addPrecioFinal(50.0); }
+        if (this.sintonizadorTDT) { addPrecioFinal(50.0); }
     }
 }

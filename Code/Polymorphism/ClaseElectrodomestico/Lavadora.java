@@ -19,6 +19,6 @@ public class Lavadora extends Electrodomestico {
     protected void precioFinal() {
         // ! When calling the SuperClass method, child atributes turn null
         super.precioFinal();
-        System.out.println(this.carga == null);
+        if (this.carga > 50) super.addPrecioFinal(50.0);
     }
 }
