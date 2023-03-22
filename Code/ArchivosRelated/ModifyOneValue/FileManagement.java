@@ -37,7 +37,7 @@ public class FileManagement {
         return toReturn;
     }
 
-    private void writeToLog(final String msgToLog) {
+    public void writeToLog(final String msgToLog) {
         Path logFilePath = this.folderPath.resolve("LogFile.txt");
         FileWriter writer = null;
 
@@ -118,15 +118,36 @@ public class FileManagement {
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    public <T> Boolean modifyValue(String idToModify, String fieldToModify, ArrayList <T> dataFields) {
+    public <T> Boolean modifyValue(String idToModify, String fieldToModify, String newValue, ArrayList <T> dataFields) {
         Boolean success = false;
         this.writeToLog(String.format("Getting the file: %s", this.fileName));
-
+        
         ArrayList <String> readedValues = this.readingValues();
-
+        
         ArrayList <String> userToModifyData = this.separateIdToModify(readedValues, idToModify);
         
         this.createCopyOfFile(readedValues, Integer.parseInt(userToModifyData.get(0)));
+        
+        userToModifyData.remove(0);
+        userToModifyData.set(Integer.parseInt(fieldToModify), newValue);
+
+        String stringFormat = "";
+
+        for (var data : userToModifyData) {
+            if (userToModifyData.indexOf(data) != (userToModifyData.size() - 1))
+                stringFormat += (data + ",");
+        }
+
+        stringFormat += userToModifyData.get(userToModifyData.size() - 1);
+
+        FileWriter writer = null;
+
+        try {
+            writer = new FileWriter(this.resultFileObj, true);
+            writer.write(String.format("%s%n", stringFormat));
+            writer.flush();
+            success = true;
+        } catch (Exception e) { e.printStackTrace(); }
 
         return success;
     }

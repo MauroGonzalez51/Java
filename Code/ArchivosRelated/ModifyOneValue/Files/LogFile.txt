@@ -25,3 +25,33 @@
 [ INFO ] [ 2023-03-21 ] [ 19-58-41 ] Getting the file: MOCK_DATA.csv
 [ INFO ] [ 2023-03-21 ] [ 19-59-47 ] Getting the file: MOCK_DATA.csv
 [ INFO ] [ 2023-03-21 ] [ 20-6-34 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-17-1 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-18-11 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-19-21 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-21-12 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-32-17 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-34-19 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-34-51 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-35-41 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-36-18 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-37-27 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-39-36 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-42-45 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-42-45 ] Value Changed in [ ID: 1] : New First name = Jose
+[ INFO ] [ 2023-03-21 ] [ 20-44-6 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-44-6 ] Value Changed in [ ID: 1 ] : New First name = Mauro
+[ INFO ] [ 2023-03-21 ] [ 20-46-18 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-46-18 ] Value Changed in [ ID: 1 ] : New First name = Andres
+[ INFO ] [ 2023-03-21 ] [ 20-47-13 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-47-13 ] Value Changed in [ ID: 1 ] : New First name = Felipe
+[ INFO ] [ 2023-03-21 ] [ 20-48-26 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-48-26 ] Value Changed in [ ID: 1 ] : New First name = Jose
+[ INFO ] [ 2023-03-21 ] [ 20-50-35 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-51-41 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-55-22 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-57-7 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-57-7 ] Value Changed in [ ID: 1 ] : New First name = Mauro
+[ INFO ] [ 2023-03-21 ] [ 20-58-52 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-58-52 ] Value Changed in [ ID: 3 ] : NEW [ First name ] = { Jose }
+[ INFO ] [ 2023-03-21 ] [ 20-59-36 ] Getting the file: MOCK_DATA.csv
+[ INFO ] [ 2023-03-21 ] [ 20-59-36 ] Value Changed in [ ID: 5 ] : NEW [ Gender ] = { Male }

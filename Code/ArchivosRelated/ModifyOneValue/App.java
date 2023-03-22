@@ -16,6 +16,7 @@ public class App {
     private static void dataLoop(FileManagement file) {
         String idToModify = "";
         String fieldToModify = "";
+        String newValue = "";
         Scanner scannerIn = null;
         
         ArrayList <String> mainMenuOptions = new ArrayList <>(Arrays.asList(
@@ -44,16 +45,29 @@ public class App {
                 fieldToModify = (scannerIn.hasNext()) ? scannerIn.next() : "";
             } while (fieldToModify.isEmpty());
         } catch (Exception e) { e.printStackTrace(); }
+        
+        try {
+            scannerIn = new Scanner(System.in);
 
-        file.modifyValue(idToModify, fieldToModify, mainMenuOptions);
+            do {
+                System.out.format("[ ID: %s ] New Value: ", idToModify);
+                newValue = (scannerIn.hasNext()) ? scannerIn.next() : "";
+            } while (newValue.isEmpty());
+        } catch (Exception e) { e.printStackTrace(); }
+
+        if(file.modifyValue(idToModify, fieldToModify, newValue,mainMenuOptions)) {
+            file.writeToLog(String.format(
+                "Value Changed in [ ID: %s ] : NEW [ %s ] = { %s }", 
+                idToModify, 
+                mainMenuOptions.get(Integer.parseInt(fieldToModify) - 1), 
+                newValue
+            ));
+        }
     }
 
     public static void main(String[] args) {
         final Path folderPath = Paths.get("Code/ArchivosRelated/ModifyOneValue/Files");
         final String fileName = "MOCK_DATA.csv";
-
-
-
         FileManagement file = new FileManagement(folderPath, fileName, "//");
         dataLoop(file);
     }
