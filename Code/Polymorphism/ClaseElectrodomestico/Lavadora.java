@@ -10,13 +10,15 @@ public class Lavadora extends Electrodomestico {
 
     public Lavadora(Double precioBase, String color, String consumoEnergetico, Double peso, Double carga) {
         super(precioBase, color, consumoEnergetico, peso);
-        this.carga = carga;       
+        this.carga = carga;   
     }
 
     public Double getCarga() { return this.carga; }
 
     @Override 
     protected void precioFinal() {
-        if (this.carga > 30.0) addPrecioFinal(50.0);
+        // ! When calling the SuperClass method, child atributes turn null
+        super.precioFinal();
+        System.out.println(this.carga == null);
     }
 }

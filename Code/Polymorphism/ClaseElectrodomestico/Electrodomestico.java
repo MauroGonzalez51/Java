@@ -28,7 +28,7 @@ public class Electrodomestico {
         // * ---------- Calling the Methods --------|>
         this.comprobarConsumoEnergetico();
         this.comprobarColor();
-        this.precioFinal();
+        // this.precioFinal();
     }
     
     // ! Constructor
@@ -42,7 +42,7 @@ public class Electrodomestico {
         // * ---------- Calling the Methods --------|>
         this.comprobarConsumoEnergetico();
         this.comprobarColor();
-        this.precioFinal();
+        // this.precioFinal();
     }
     
     // ! Constructor
@@ -56,7 +56,7 @@ public class Electrodomestico {
         // * ---------- Calling the Methods --------|>
         this.comprobarConsumoEnergetico();
         this.comprobarColor();
-        this.precioFinal();
+        // this.precioFinal();
     }
 
     private void comprobarConsumoEnergetico() {

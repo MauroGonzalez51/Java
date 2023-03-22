@@ -79,12 +79,14 @@ public class App {
                     case 1: {
                         switch (constructorChoiceBlock.get(randomizeValue(constructorChoiceBlock))) {
                             case 1: {
-                                arrayElectrodomestico.add(new Lavadora());
+                                Lavadora lavadora = new Lavadora();
+                                arrayElectrodomestico.add(lavadora);
                                 break;
                             }
 
                             case 2: {
-                                arrayElectrodomestico.add(new Television());
+                                Television television = new Television();
+                                arrayElectrodomestico.add(television);
                                 break;
                             }
                         }
@@ -95,24 +97,26 @@ public class App {
                     case 2: {
                         switch (constructorChoiceBlock.get(randomizeValue(constructorChoiceBlock))) {
                             case 1: {
-                                arrayElectrodomestico.add(new Lavadora(
-                                        randomDoubleValue(0.0, 200.0),
-                                        colorValues.get(randomizeValue(colorValues)),
-                                        efficiencyValues.get(randomizeValue(efficiencyValues)),
-                                        randomDoubleValue(0.0, 200.0),
-                                        randomDoubleValue(0.0, 200.0)));
+                                Lavadora lavadora = new Lavadora(
+                                    randomDoubleValue(0.0, 200.0),
+                                    colorValues.get(randomizeValue(colorValues)),
+                                    efficiencyValues.get(randomizeValue(efficiencyValues)),
+                                    randomDoubleValue(0.0, 200.0),
+                                    randomDoubleValue(0.0, 200.0));
+                                arrayElectrodomestico.add(lavadora);
 
                                 break;
                             }
 
                             case 2: {
-                                arrayElectrodomestico.add(new Television(
-                                        randomDoubleValue(0.0, 200.0),
-                                        colorValues.get(randomizeValue(colorValues)),
-                                        efficiencyValues.get(randomizeValue(efficiencyValues)),
-                                        randomDoubleValue(0.0, 200.0),
-                                        randomDoubleValue(0.0, 200.0),
-                                        randomBooleanValue()));
+                                Television television = new Television(
+                                    randomDoubleValue(0.0, 200.0),
+                                    colorValues.get(randomizeValue(colorValues)),
+                                    efficiencyValues.get(randomizeValue(efficiencyValues)),
+                                    randomDoubleValue(0.0, 200.0),
+                                    randomDoubleValue(0.0, 200.0),
+                                    randomBooleanValue());
+                                arrayElectrodomestico.add(television);
                                 break;
                             }
                         }
@@ -122,11 +126,13 @@ public class App {
                 }
                 
                 if (arrayElectrodomestico.get(i) instanceof Lavadora) {
+                    arrayElectrodomestico.get(i).precioFinal();
                     totalLavadoras += arrayElectrodomestico.get(i).getPrecioFinal();
                     objectInstanceOf = "Lavadora";
                 }
                 
                 if (arrayElectrodomestico.get(i) instanceof Television) {
+                    arrayElectrodomestico.get(i).precioFinal();
                     totalTelevision += arrayElectrodomestico.get(i).getPrecioFinal();
                     objectInstanceOf = "Television";
                 }
@@ -142,7 +148,7 @@ public class App {
 
     public static void main(String[] args) {
         // ! For testing change the value below
-        final Integer cantidadDatos = 10;
+        final Integer cantidadDatos = 1;
 
         List <String> types = List.of("Lavadora", "Television");
         List <Double> result = dataLoop(cantidadDatos, true);
@@ -151,6 +157,5 @@ public class App {
         result.forEach((value) -> {
             System.out.format("Total [%s]: %f%n", types.get(result.indexOf(value)), value);
         });
-
     }
 }
