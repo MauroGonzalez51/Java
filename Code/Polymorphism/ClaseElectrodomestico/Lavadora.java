@@ -17,8 +17,11 @@ public class Lavadora extends Electrodomestico {
 
     @Override 
     protected void precioFinal() {
-        // ! When calling the SuperClass method, child atributes turn null
+        // ! When calling the SuperClass method, child atributes turns null
+        // * So, in order to prevent that the SuperClass method is no longer called 
+        // * In the SuperConstructor, instead is called here
         super.precioFinal();
+        // System.out.println(this.carga);
         if (this.carga > 50) super.addPrecioFinal(50.0);
     }
 }
