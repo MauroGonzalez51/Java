@@ -23,11 +23,15 @@ public class Television extends Electrodomestico {
 
     @Override
     protected void precioFinal() {
-        // ! When calling the SuperClass methods, Child atributes
+        // ! When calling the SuperClass methods, Child atributes turns null
+        // * So, in order to prevent that the SuperClass method is no longer called 
+        // * In the SuperConstructor, instead is called here
         super.precioFinal();
 
+        // System.out.println(this.resolucion);
         if (this.resolucion > 40) { addPrecioFinal(getPrecioFinal() * 0.3); }
         
+        // System.out.println(this.sintonizadorTDT);
         if (this.sintonizadorTDT) { addPrecioFinal(50.0); }
     }
 }

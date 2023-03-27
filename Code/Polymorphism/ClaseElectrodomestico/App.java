@@ -78,15 +78,28 @@ public class App {
                 switch (constructorChoiceBlock.get(randomizeValue(constructorChoiceBlock))) {
                     case 1: {
                         switch (constructorChoiceBlock.get(randomizeValue(constructorChoiceBlock))) {
+                            /*
+                             * So, it wasn't necessary to create a Instance of a derivated class
+                             * in a 'Explicit' way like : Electrodomestico obj = new Electrodomestico()
+                             * in order to fix the NullPointerException
+                             * 
+                             * Instead the 'place' where the method 'precioFinal()' were being called
+                             * was giving some issues with the ChildAttributes turning null
+                             * 
+                             * 
+                             */
+
                             case 1: {
-                                Lavadora lavadora = new Lavadora();
-                                arrayElectrodomestico.add(lavadora);
+                                // Lavadora lavadora = new Lavadora();
+                                // arrayElectrodomestico.add(lavadora);
+                                arrayElectrodomestico.add(new Lavadora());
                                 break;
                             }
 
                             case 2: {
-                                Television television = new Television();
-                                arrayElectrodomestico.add(television);
+                                // Television television = new Television();
+                                // arrayElectrodomestico.add(television);
+                                arrayElectrodomestico.add(new Television());
                                 break;
                             }
                         }
@@ -97,26 +110,45 @@ public class App {
                     case 2: {
                         switch (constructorChoiceBlock.get(randomizeValue(constructorChoiceBlock))) {
                             case 1: {
-                                Lavadora lavadora = new Lavadora(
+                                // Lavadora lavadora = new Lavadora(
+                                //     randomDoubleValue(0.0, 200.0),
+                                //     colorValues.get(randomizeValue(colorValues)),
+                                //     efficiencyValues.get(randomizeValue(efficiencyValues)),
+                                //     randomDoubleValue(0.0, 200.0),
+                                //     randomDoubleValue(0.0, 200.0));
+                                // arrayElectrodomestico.add(lavadora);
+
+                                arrayElectrodomestico.add(new Lavadora(
                                     randomDoubleValue(0.0, 200.0),
                                     colorValues.get(randomizeValue(colorValues)),
                                     efficiencyValues.get(randomizeValue(efficiencyValues)),
                                     randomDoubleValue(0.0, 200.0),
-                                    randomDoubleValue(0.0, 200.0));
-                                arrayElectrodomestico.add(lavadora);
+                                    randomDoubleValue(0.0, 200.0)
+                                    
+                                ));
 
                                 break;
                             }
 
                             case 2: {
-                                Television television = new Television(
+                                // Television television = new Television(
+                                //     randomDoubleValue(0.0, 200.0),
+                                //     colorValues.get(randomizeValue(colorValues)),
+                                //     efficiencyValues.get(randomizeValue(efficiencyValues)),
+                                //     randomDoubleValue(0.0, 200.0),
+                                //     randomDoubleValue(0.0, 200.0),
+                                //     randomBooleanValue());
+                                // arrayElectrodomestico.add(television);
+                                
+                                arrayElectrodomestico.add(new Television(
                                     randomDoubleValue(0.0, 200.0),
                                     colorValues.get(randomizeValue(colorValues)),
                                     efficiencyValues.get(randomizeValue(efficiencyValues)),
                                     randomDoubleValue(0.0, 200.0),
                                     randomDoubleValue(0.0, 200.0),
-                                    randomBooleanValue());
-                                arrayElectrodomestico.add(television);
+                                    randomBooleanValue()
+                                ));
+
                                 break;
                             }
                         }
@@ -125,14 +157,19 @@ public class App {
                     }
                 }
                 
+                // ! The method 'precioFinal()' is called here
+                // * Both of them have their own implementation of the method 'precioFinal()'
+                // * So, it's okay to call it this way
+                arrayElectrodomestico.get(i).precioFinal();
+
                 if (arrayElectrodomestico.get(i) instanceof Lavadora) {
-                    arrayElectrodomestico.get(i).precioFinal();
+                    // arrayElectrodomestico.get(i).precioFinal();
                     totalLavadoras += arrayElectrodomestico.get(i).getPrecioFinal();
                     objectInstanceOf = "Lavadora";
                 }
                 
                 if (arrayElectrodomestico.get(i) instanceof Television) {
-                    arrayElectrodomestico.get(i).precioFinal();
+                    // arrayElectrodomestico.get(i).precioFinal();
                     totalTelevision += arrayElectrodomestico.get(i).getPrecioFinal();
                     objectInstanceOf = "Television";
                 }
@@ -148,7 +185,7 @@ public class App {
 
     public static void main(String[] args) {
         // ! For testing change the value below
-        final Integer cantidadDatos = 1;
+        final Integer cantidadDatos = 10;
 
         List <String> types = List.of("Lavadora", "Television");
         List <Double> result = dataLoop(cantidadDatos, true);
