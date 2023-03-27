@@ -18,6 +18,23 @@ public class FileManagement {
     private String charToIgnore;
     private File resultFileObj;
 
+    public Runnable createRunnable(final String processToRun) {
+        Runnable handleCase = new Runnable() {
+            public void run() {
+                switch (processToRun) {
+                    case "1": {
+                        readingValues();
+                        break;
+                    }
+
+                    default: System.exit(1);
+                }
+            }
+        };
+
+        return handleCase;
+    }
+
     public FileManagement(Path folderPath, String fileName, String charToIgnore) {
         this.folderPath = folderPath;
         this.fileName = fileName;
