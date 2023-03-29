@@ -38,8 +38,8 @@ public class Ciclistas {
     }
 
     public void printInfo() {
-        System.out.format("ID: [ %d ]%n", this.ID);
-        System.out.format("Nombre ciclista [ %s ]%n", this.nombreCiclista);
+        System.out.format("ID: [ %s ]%n", this.ID.toString());
+        System.out.format("Nombre ciclista: [ %s ]%n", this.nombreCiclista);
         System.out.format("Tiempo acumulado en carrera: [ %s ]%n", this.tiempoAcumuladoEnCarrera.toString());
     }
 

@@ -26,5 +26,11 @@ public class Contrarelojista extends Ciclistas {
 
     public Double getVelocidadMaxima() { return this.velocidadMaxima; }
 
-    public void setVelocidadMaxima() { this.velocidadMaxima = val; }
+    public void setVelocidadMaxima(Double val) { this.velocidadMaxima = val; }
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.format("Velocidad Maxima: [ %s ]%n", this.velocidadMaxima.toString());
+    }
 }

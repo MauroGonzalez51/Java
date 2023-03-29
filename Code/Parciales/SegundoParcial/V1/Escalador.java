@@ -39,4 +39,11 @@ public class Escalador extends Ciclistas {
 
     public void setAceleracionPromedioEnSubida(Double val) { this.aceleracionPromedioEnSubida = val; }
     public void setGradoDeRampaSoportada(Double val) { this.gradoDeRampaSoportada = val; }
+
+    @Override
+    public void printInfo() {
+        super.printInfo();
+        System.out.format("Aceleracion promedio en subida: [ %s ]%n", this.aceleracionPromedioEnSubida.toString());
+        System.out.format("Grado de rampa soportada: [ %s ]%n", this.gradoDeRampaSoportada.toString());
+    }
 }
