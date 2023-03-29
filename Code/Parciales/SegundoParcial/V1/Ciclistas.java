@@ -1,5 +1,7 @@
 package Code.Parciales.SegundoParcial.V1;
 
+import java.util.Scanner;
+
 public class Ciclistas {
     private Integer ID;
     private String nombreCiclista;
@@ -12,8 +14,38 @@ public class Ciclistas {
     }
 
     public Ciclistas() {
-        this(null, null);
+        System.out.println();
+
+        Scanner scannerIn = null;
+
+        try {
+            scannerIn = new Scanner(System.in);
+            do {
+                System.out.format("Ingrese el ID: ");
+                this.ID = (scannerIn.hasNextInt()) ? scannerIn.nextInt() : -1;
+            } while (this.ID < 0);
+        } catch (Exception e) { e.printStackTrace(); }
+
+        try {
+            scannerIn = new Scanner(System.in);
+            do {
+                System.out.format("Ingrese el nombre del ciclista: ");
+                this.nombreCiclista = (scannerIn.hasNext()) ? scannerIn.next() : "";
+            } while (this.nombreCiclista.isEmpty());
+        } catch (Exception e) { e.printStackTrace(); }
+
+        this.tiempoAcumuladoEnCarrera = 0.0;
     }
+
+    public void printInfo() {
+        System.out.format("ID: [ %d ]%n", this.ID);
+        System.out.format("Nombre ciclista [ %s ]%n", this.nombreCiclista);
+        System.out.format("Tiempo acumulado en carrera: [ %s ]%n", this.tiempoAcumuladoEnCarrera.toString());
+    }
+
+
+
+
 
     public Integer getID() { return this.ID; }
     public String nombreCiclista() { return this.nombreCiclista; }
