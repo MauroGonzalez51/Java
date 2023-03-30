@@ -11,10 +11,17 @@ public class App {
         System.out.println();
     }
 
+    private static void printlnInConsole(Integer amountOfChar, String msgToConsole) {
+        System.out.print(msgToConsole + " ");
+        for (Integer i = 0; i < amountOfChar; i++) { System.out.format("-"); }
+        System.out.println();
+    }
 
-    private static <T> String mainMenu(ArrayList <T> mainMenuListOptions) {
+
+    private static <T> String mainMenu(ArrayList <T> mainMenuListOptions, Integer indexOfEquipo) {
         final String[] optionChosed = { null };
 
+        printlnInConsole(17, String.format("[ Equipo %d ]", indexOfEquipo + 1));
         mainMenuListOptions.forEach((option) -> {
             System.out.format("%s%n", option);
         });
@@ -53,10 +60,26 @@ public class App {
         return toReturn[0];
     }
 
-    private static void dataLoop(ArrayList <Equipo> equipos) {
-        System.out.println();
-        equipos.add(new Equipo());
+    private static Boolean endCaseTeam() {
+        final Boolean[] toReturn = { true };
+        final String[] userInput = { "" };
 
+        Scanner scannerIn = null;
+
+        try {
+            scannerIn = new Scanner(System.in);
+            do {
+                System.out.format("Agregar un nuevo [Equipo] (Si/No): ");
+                userInput[0] = (scannerIn.hasNext()) ? scannerIn.next() : "";
+            } while (userInput[0].isEmpty());
+        } catch (Exception e) { e.printStackTrace(); }
+
+        toReturn[0] = (userInput[0].equalsIgnoreCase("Si")) ? true : false;
+
+        return toReturn[0];
+    }
+
+    private static void dataLoop(ArrayList <Equipo> equipos) {
         ArrayList <String> mainMenuListOptions = new ArrayList <>(Arrays.asList(
             "1) Añadir ciclista al equipo",
             "2) Imprimir los datos del equipo",
@@ -66,8 +89,12 @@ public class App {
         ));
 
         do {
-            printlnInConsole(30);
-        } while (handleCase(mainMenu(mainMenuListOptions), equipos.get(equipos.size() - 1)));
+            System.out.println();
+            equipos.add(new Equipo());
+            do {
+                printlnInConsole(30);
+            } while (handleCase(mainMenu(mainMenuListOptions, equipos.size() - 1), equipos.get(equipos.size() - 1)));
+        } while (endCaseTeam());
     }
 
     public static void main(String[] args) {
