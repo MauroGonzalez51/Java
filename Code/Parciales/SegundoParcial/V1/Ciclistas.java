@@ -43,8 +43,7 @@ public class Ciclistas {
         System.out.format("Tiempo acumulado en carrera: [ %s ]%n", this.tiempoAcumuladoEnCarrera.toString());
     }
 
-
-
+    public String getType() { return String.format("Class [%s]%n", this.getClass().getSimpleName()); }
 
 
     public Integer getID() { return this.ID; }
