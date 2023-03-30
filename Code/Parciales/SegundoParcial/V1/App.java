@@ -33,7 +33,9 @@ public class App {
         return optionChosed[0];
     }
 
-    private static void handleCase(String optionIngresed, Equipo equipoCiclistas) {
+    private static Boolean handleCase(String optionIngresed, Equipo equipoCiclistas) {
+        final Boolean[] toReturn = { true };
+
         switch (optionIngresed) {
             case "1": {
                 equipoCiclistas.createInstanceOfCiclista();
@@ -45,12 +47,15 @@ public class App {
                 break;
             }
 
-            default: System.exit(1);
+            default: toReturn[0] = false;
         }
+
+        return toReturn[0];
     }
 
-    private static void dataLoop(Equipo equipoCiclistas) {
-        equipoCiclistas = new Equipo();
+    private static void dataLoop(ArrayList <Equipo> equipos) {
+        System.out.println();
+        equipos.add(new Equipo());
 
         ArrayList <String> mainMenuListOptions = new ArrayList <>(Arrays.asList(
             "1) Añadir ciclista al equipo",
@@ -62,12 +67,11 @@ public class App {
 
         do {
             printlnInConsole(30);
-            handleCase(mainMenu(mainMenuListOptions), equipoCiclistas);
-        } while (true);
+        } while (handleCase(mainMenu(mainMenuListOptions), equipos.get(equipos.size() - 1)));
     }
 
     public static void main(String[] args) {
-        Equipo equipoCiclistas = null;
-        dataLoop(equipoCiclistas);
+        ArrayList <Equipo> equipos = new ArrayList <>();
+        dataLoop(equipos);
     }
 }

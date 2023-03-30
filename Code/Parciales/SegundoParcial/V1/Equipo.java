@@ -10,7 +10,17 @@ public class Equipo {
 
     public ArrayList <Ciclistas> ciclistas = new ArrayList <>();
 
+    public Equipo() {
+        Scanner scannerIn = null;
 
+        try {
+            scannerIn = new Scanner(System.in);
+            do {
+                System.out.format("Ingrese el nombre del equipo: ");
+                this.nombreEquipo = (scannerIn.hasNext()) ? scannerIn.next() : "";
+            } while (this.nombreEquipo.isEmpty());
+        } catch (Exception e) { e.printStackTrace(); }
+    }
 
     public String getNombreEquipo() { return this.nombreEquipo; }
     public Double tiemposDeCarreraPromedio() { return this.tiemposDeCarreraPromedio; }
@@ -26,6 +36,7 @@ public class Equipo {
         System.out.format("TIempo de carrera promedio: %f%n", this.tiemposDeCarreraPromedio);
 
         ciclistas.forEach((ciclista) -> {
+            this.printlnInConsole(15);
             System.out.format("Ciclista [%d]%n", ciclistas.indexOf(ciclista) + 1);
             ciclista.printInfo();
         });
