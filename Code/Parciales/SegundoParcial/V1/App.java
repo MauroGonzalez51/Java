@@ -54,10 +54,21 @@ public class App {
                 break;
             }
 
+            case "3": {
+                equipoCiclistas.printResultsByType();
+                break;
+            }
+
             default: toReturn[0] = false;
         }
 
         return toReturn[0];
+    }
+
+    private static void clearConsole() {
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) { e.printStackTrace(); }
     }
 
     private static Boolean endCaseTeam() {
@@ -92,6 +103,8 @@ public class App {
             System.out.println();
             equipos.add(new Equipo());
             do {
+                // TODO Maybe adding some delay here, so it won't interrupt so abruptly
+                clearConsole(); 
                 printlnInConsole(30);
             } while (handleCase(mainMenu(mainMenuListOptions, equipos.size() - 1), equipos.get(equipos.size() - 1)));
         } while (endCaseTeam());

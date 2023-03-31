@@ -6,6 +6,7 @@ public class Ciclistas {
     private Integer ID;
     private String nombreCiclista;
     private Double tiempoAcumuladoEnCarrera;
+    private String className;
 
     public Ciclistas(Integer ID, String nombreCiclista) {
         this.ID = ID;

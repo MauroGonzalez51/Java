@@ -8,7 +8,7 @@ public class Equipo {
     private String nombreEquipo;
     private Double tiemposDeCarreraPromedio;
 
-    public ArrayList <Ciclistas> ciclistas = new ArrayList <>();
+    private ArrayList <Ciclistas> ciclistas = new ArrayList <>();
 
     public Equipo() {
         Scanner scannerIn = null;
@@ -46,6 +46,33 @@ public class Equipo {
         System.out.println();
         for (Integer i = 0; i < amountOfChar; i++) { System.out.format("-"); }
         System.out.println();
+    }
+
+    private ArrayList <String> searchByType(String typeToSearch) {
+        // ! Here is gonna be saved the ID's
+        ArrayList <String> arrayListToReturn = new ArrayList <>();
+
+        this.ciclistas.forEach((ciclista) -> {
+            if (ciclista.getClass().getSimpleName().toString().equals(typeToSearch)) {
+                arrayListToReturn.add(Integer.toString(ciclista.getID()));
+            }
+        });
+        
+        return arrayListToReturn;
+    }
+
+    public void printResultsByType() {
+        ArrayList <String> derivatedClassNames = new ArrayList <>(Arrays.asList("Escalador", "Velocista",
+            "Contrarelojista"
+        ));
+
+        derivatedClassNames.forEach((className) -> {
+            this.printlnInConsole(25);
+            System.out.format("[%s]%n", className);
+            searchByType(className).forEach((resultID) -> {
+                System.out.format("ID: %s%n", resultID);
+            });
+        });
     }
 
     public void createInstanceOfCiclista() {
