@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class App {
+    private static Integer delayAfterOperation = 0;
+
     private static void printlnInConsole(Integer amountOfChar) {
         System.out.println();
         for (Integer i = 0; i < amountOfChar; i++) { System.out.format("-"); }
@@ -51,11 +53,19 @@ public class App {
 
             case "2": {
                 equipoCiclistas.printTeam();
+                delayAfterOperation = 10000;
                 break;
             }
 
             case "3": {
-                equipoCiclistas.printResultsByType();
+                equipoCiclistas.printResultsByType(false);
+                delayAfterOperation = 15000;
+                break;
+            }
+
+            case "4": {
+                equipoCiclistas.printResultsByType(true);
+                delayAfterOperation = 10000;
                 break;
             }
 
@@ -65,11 +75,22 @@ public class App {
         return toReturn[0];
     }
 
+    private static void clearConsole(Integer delayAfterOperation) {
+        try {
+            Thread.sleep(delayAfterOperation);
+        } catch (InterruptedException e) { e.printStackTrace(); }
+
+        try {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
     private static void clearConsole() {
         try {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         } catch (Exception e) { e.printStackTrace(); }
     }
+
 
     private static Boolean endCaseTeam() {
         final Boolean[] toReturn = { true };
@@ -99,12 +120,15 @@ public class App {
             "5) Salir"
         ));
 
+        Boolean firstRun = true;
+
         do {
             System.out.println();
             equipos.add(new Equipo());
             do {
-                // TODO Maybe adding some delay here, so it won't interrupt so abruptly
-                clearConsole(); 
+                if (firstRun) { clearConsole(); firstRun = !firstRun; } 
+                else clearConsole(delayAfterOperation);
+
                 printlnInConsole(30);
             } while (handleCase(mainMenu(mainMenuListOptions, equipos.size() - 1), equipos.get(equipos.size() - 1)));
         } while (endCaseTeam());

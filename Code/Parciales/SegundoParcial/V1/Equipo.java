@@ -2,6 +2,7 @@ package Code.Parciales.SegundoParcial.V1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Equipo {
@@ -48,31 +49,71 @@ public class Equipo {
         System.out.println();
     }
 
-    private ArrayList <String> searchByType(String typeToSearch) {
-        // ! Here is gonna be saved the ID's
-        ArrayList <String> arrayListToReturn = new ArrayList <>();
-
-        this.ciclistas.forEach((ciclista) -> {
-            if (ciclista.getClass().getSimpleName().toString().equals(typeToSearch)) {
-                arrayListToReturn.add(Integer.toString(ciclista.getID()));
-            }
-        });
+    private HashMap <Integer, Integer> searchByParam(String typeToSeach, Boolean searchSomebodyInTeam) {
         
-        return arrayListToReturn;
+        // ! [1]: Storing the Index of 'ciclista' in the max order list
+        // ! [2]: Storing the actual ID to be displayed
+        HashMap <Integer, Integer> hashMapToReturn = new HashMap <>();
+
+        if (!searchSomebodyInTeam) {
+            this.ciclistas.forEach((ciclista) -> {
+                if (ciclista.getClass().getSimpleName().toString().equals(typeToSeach)) {
+                    hashMapToReturn.put(this.ciclistas.indexOf(ciclista), ciclista.getID());
+                }
+            });
+        } else {
+            Scanner scannerIn = null;
+            final String[] arrayInfo = {"", ""};
+
+            System.out.println("Ingrese los datos para proceder con la busqueda ...");
+
+            try {
+                scannerIn = new Scanner(System.in);
+                do {
+                    System.out.format("Ingrese el [ID]: ");
+                    arrayInfo[0] = (scannerIn.hasNext()) ? scannerIn.next() : "";
+                } while (arrayInfo[0].isEmpty());
+            } catch (Exception e) { e.printStackTrace(); }
+
+            try {
+                scannerIn = new Scanner(System.in);
+                do {
+                    System.out.format("Ingrese el [Nombre]: ");
+                    arrayInfo[1] = (scannerIn.hasNext()) ? scannerIn.next() : "";
+                } while (arrayInfo[1].isEmpty());
+            } catch (Exception e) { e.printStackTrace(); }
+
+            this.ciclistas.forEach((ciclista) -> {
+                if ((ciclista.getID().toString().equals(arrayInfo[0])) && (ciclista.getNombreCiclista().equals(arrayInfo[1]))) {
+                    hashMapToReturn.put(this.ciclistas.indexOf(ciclista), ciclista.getID());
+                }
+            });
+        }
+
+        return hashMapToReturn;
     }
 
-    public void printResultsByType() {
+    public void printResultsByType(Boolean searchSomebodyInTeam) {
         ArrayList <String> derivatedClassNames = new ArrayList <>(Arrays.asList("Escalador", "Velocista",
             "Contrarelojista"
         ));
 
-        derivatedClassNames.forEach((className) -> {
-            this.printlnInConsole(25);
-            System.out.format("[%s]%n", className);
-            searchByType(className).forEach((resultID) -> {
-                System.out.format("ID: %s%n", resultID);
+        if (!searchSomebodyInTeam) {
+            derivatedClassNames.forEach((className) -> {
+                this.printlnInConsole(25);
+                System.out.format("[%s]%n", className);
+                this.searchByParam(className, false).forEach((indexOfCiclista, ID) -> {
+                    System.out.format("> [ ID ]: %s  | [ NOMBRE ]: %s%n", 
+                        ID, this.ciclistas.get(indexOfCiclista).getNombreCiclista());
+                });
             });
-        });
+        } else { 
+            System.out.println();
+            this.searchByParam(null, true).forEach((indexOfCiclista, ID) -> {
+                System.out.format("> [ ID ]: %s  | [ Nombre ]: %s%n",
+                    ID, this.ciclistas.get(indexOfCiclista).getNombreCiclista());
+            });
+        }
     }
 
     public void createInstanceOfCiclista() {
