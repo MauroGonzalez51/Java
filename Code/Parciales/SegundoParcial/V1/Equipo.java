@@ -21,15 +21,25 @@ public class Equipo {
                 this.nombreEquipo = (scannerIn.hasNext()) ? scannerIn.next() : "";
             } while (this.nombreEquipo.isEmpty());
         } catch (Exception e) { e.printStackTrace(); }
+
+        this.tiemposDeCarreraPromedio = 0.0;
     }
 
-    public String getNombreEquipo() { return this.nombreEquipo; }
-    public Double tiemposDeCarreraPromedio() { return this.tiemposDeCarreraPromedio; }
+    protected String getNombreEquipo() { return this.nombreEquipo; }
+    protected Double tiemposDeCarreraPromedio() { return this.tiemposDeCarreraPromedio; }
 
-    public void setNombreEquipo(String val) { this.nombreEquipo = val; }
-    public void setTiemposDeCarreraPromedio(Double val) { this.tiemposDeCarreraPromedio = val; } 
+    protected void setNombreEquipo(String val) { this.nombreEquipo = val; }
+    protected void setTiemposDeCarreraPromedio(Double val) { this.tiemposDeCarreraPromedio = val; } 
 
-    public void printTeam() {
+    protected void averageRaceTime() {
+        this.ciclistas.forEach((ciclista) -> {
+            this.tiemposDeCarreraPromedio += ciclista.getTiempoAcumuladoEnCarrera();
+        });
+
+        this.tiemposDeCarreraPromedio /= this.ciclistas.size();
+    }
+
+    protected void printTeam() {
         this.printlnInConsole(30);
         System.out.println("Datos del equipo");
 
@@ -43,13 +53,13 @@ public class Equipo {
         });
     }
 
-    private void printlnInConsole(Integer amountOfChar) {
+    protected void printlnInConsole(Integer amountOfChar) {
         System.out.println();
         for (Integer i = 0; i < amountOfChar; i++) { System.out.format("-"); }
         System.out.println();
     }
 
-    private HashMap <Integer, Integer> searchByParam(String typeToSeach, Boolean searchSomebodyInTeam) {
+    protected HashMap <Integer, Integer> searchByParam(String typeToSeach, Boolean searchSomebodyInTeam) {
         
         // ! [1]: Storing the Index of 'ciclista' in the max order list
         // ! [2]: Storing the actual ID to be displayed
@@ -63,28 +73,30 @@ public class Equipo {
             });
         } else {
             Scanner scannerIn = null;
-            final String[] arrayInfo = {"", ""};
+            final ArrayList <String> arrayInfo = new ArrayList <>(Arrays.asList("", ""));
 
             System.out.println("Ingrese los datos para proceder con la busqueda ...");
 
             try {
                 scannerIn = new Scanner(System.in);
                 do {
+                    arrayInfo.remove(0);
                     System.out.format("Ingrese el [ID]: ");
-                    arrayInfo[0] = (scannerIn.hasNext()) ? scannerIn.next() : "";
-                } while (arrayInfo[0].isEmpty());
+                    arrayInfo.add((scannerIn.hasNext()) ? scannerIn.next() : "");
+                } while (arrayInfo.get(0).isEmpty());
             } catch (Exception e) { e.printStackTrace(); }
 
             try {
                 scannerIn = new Scanner(System.in);
                 do {
+                    arrayInfo.remove(1);
                     System.out.format("Ingrese el [Nombre]: ");
-                    arrayInfo[1] = (scannerIn.hasNext()) ? scannerIn.next() : "";
-                } while (arrayInfo[1].isEmpty());
+                    arrayInfo.add((scannerIn.hasNext()) ? scannerIn.next() : "");
+                } while (arrayInfo.get(1).isEmpty());
             } catch (Exception e) { e.printStackTrace(); }
 
             this.ciclistas.forEach((ciclista) -> {
-                if ((ciclista.getID().toString().equals(arrayInfo[0])) && (ciclista.getNombreCiclista().equals(arrayInfo[1]))) {
+                if ((ciclista.getID().toString().equals(arrayInfo.get(0))) && (ciclista.getNombreCiclista().equals(arrayInfo.get(1)))) {
                     hashMapToReturn.put(this.ciclistas.indexOf(ciclista), ciclista.getID());
                 }
             });
@@ -93,7 +105,7 @@ public class Equipo {
         return hashMapToReturn;
     }
 
-    public void printResultsByType(Boolean searchSomebodyInTeam) {
+    protected void printResultsByType(Boolean searchSomebodyInTeam) {
         ArrayList <String> derivatedClassNames = new ArrayList <>(Arrays.asList("Escalador", "Velocista",
             "Contrarelojista"
         ));
@@ -108,7 +120,7 @@ public class Equipo {
                 });
             });
         } else { 
-            System.out.println();
+            this.printlnInConsole(25);
             this.searchByParam(null, true).forEach((indexOfCiclista, ID) -> {
                 System.out.format("> [ ID ]: %s  | [ Nombre ]: %s%n",
                     ID, this.ciclistas.get(indexOfCiclista).getNombreCiclista());
@@ -116,7 +128,7 @@ public class Equipo {
         }
     }
 
-    public void createInstanceOfCiclista() {
+    protected void createInstanceOfCiclista() {
         Scanner scannerIn = null;
 
         this.printlnInConsole(30);

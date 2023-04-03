@@ -48,6 +48,7 @@ public class App {
         switch (optionIngresed) {
             case "1": {
                 equipoCiclistas.createInstanceOfCiclista();
+                delayAfterOperation = 5000;
                 break;
             }
 
