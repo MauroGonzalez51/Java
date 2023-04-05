@@ -13,6 +13,22 @@ public class Ciclistas {
         this.tiempoAcumuladoEnCarrera = 0.0;
     }
 
+    /*
+     * Basic Ciclista class
+     * Each DerivatedClass works the same way
+     * ---------------------------------------------------------|>
+     * [Constructor]
+     * Takes a UserInput for all the ClassAttributes (The inherited ones will be taken in parent class)
+     * 
+     * ---------------------------------------------------------|>
+     * [Getters] [Setters]
+     * For each ClassAttribute (The inherited ones will be accesible via ParentClass [Getters][Setters])
+     * 
+     * ---------------------------------------------------------|>
+     * .getType() [Method]
+     * Returns the ClassName of an Object previously created
+     */
+
     public Ciclistas() {
         System.out.println();
 
@@ -45,11 +61,9 @@ public class Ciclistas {
 
     public String getType() { return String.format("Class [%s]%n", this.getClass().getSimpleName()); }
 
-
     public Integer getID() { return this.ID; }
     public String getNombreCiclista() { return this.nombreCiclista; }
     public Double getTiempoAcumuladoEnCarrera() { return this.tiempoAcumuladoEnCarrera; }
-
 
     public void setID(Integer val) { this.ID = val; }
     public void setNombreCiclista(String val) { this.nombreCiclista = val; }
