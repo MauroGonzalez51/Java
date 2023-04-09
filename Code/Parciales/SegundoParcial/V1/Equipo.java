@@ -104,7 +104,7 @@ public class Equipo {
             });
         } else {
             Scanner scannerIn = null;
-            final ArrayList <String> arrayInfo = new ArrayList <>(Arrays.asList("", ""));
+            String[] arrayInfo = new String[2];
 
             System.out.println("Ingrese los datos para proceder con la busqueda ...");
 
@@ -119,32 +119,29 @@ public class Equipo {
 
             try {
                 scannerIn = new Scanner(System.in);
-                do {
-                    arrayInfo.remove(0);
-                    System.out.format("Ingrese el [ID]: ");
-                    arrayInfo.add((scannerIn.hasNext()) ? scannerIn.next() : "");
-                } while (arrayInfo.get(0).isEmpty());
-            } catch (Exception e) { e.printStackTrace(); }
 
-            try {
-                scannerIn = new Scanner(System.in);
                 do {
-                    arrayInfo.remove(1);
+                    System.out.format("Ingrese el [ID]: ");
+                    arrayInfo[0] = scannerIn.nextLine();
+                } while (arrayInfo[0].isEmpty());
+                
+                do {
                     System.out.format("Ingrese el [Nombre]: ");
-                    arrayInfo.add((scannerIn.hasNext()) ? scannerIn.next() : "");
-                } while (arrayInfo.get(1).isEmpty());
-            } catch (Exception e) { e.printStackTrace(); }
+                    arrayInfo[1] = scannerIn.nextLine();
+                } while (arrayInfo[1].isEmpty());
+
+            } catch (Exception e) {}
 
             // * Iteration to loof for coincidences
 
             /*
-             * The .forEach() method can be breaked cuz insn's as easy as expected :>
+             * The .forEach() method can be breaked cuz isn't as easy as expected :>
              * So, it will reuturn all the coincidences :>
              * 
              */
 
             this.ciclistas.forEach((ciclista) -> {
-                if ((ciclista.getID().toString().equals(arrayInfo.get(0))) && (ciclista.getNombreCiclista().equals(arrayInfo.get(1)))) {
+                if ((ciclista.getID().toString().equals(arrayInfo[0])) && (ciclista.getNombreCiclista().equals(arrayInfo[1]))) {
                     hashMapToReturn.put(this.ciclistas.indexOf(ciclista), ciclista.getID());
                 }
             });
@@ -176,10 +173,17 @@ public class Equipo {
             });
         } else { 
             this.printlnInConsole(25);
-            this.searchByParam(null, true).forEach((indexOfCiclista, ID) -> {
-                System.out.format("> [ ID ]: %s  | [ Nombre ]: %s%n",
-                    ID, this.ciclistas.get(indexOfCiclista).getNombreCiclista());
-            });
+            
+            HashMap <Integer, Integer> searchResults = this.searchByParam(null, true);
+            
+            if (searchResults.size() > 0) {
+                searchResults.forEach((indexOfCiclista, ID) -> {
+                    System.out.format("> [ ID ]: %s  | [ Nombre ]: %s%n",
+                        ID, this.ciclistas.get(indexOfCiclista).getNombreCiclista());
+                });
+            } else 
+                System.out.println("No se encontraron coindicencias");
+
         }
     }
 
