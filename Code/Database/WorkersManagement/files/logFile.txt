@@ -1,0 +1,5 @@
+
+--------------------------------------------------------------------------------
+[ INFO ] [ 2023-04-18 ] [ 13-3-33 ] Session started
+[ INFO ] [ 2023-04-18 ] [ 13-3-50 ] New user created [ Jose ]
+[ INFO ] [ 2023-04-18 ] [ 13-3-50 ] Successfully inserted into database [ Jose ]
