@@ -144,34 +144,49 @@ public class App {
     
     // ! --------------------------------------------------------------------------------------------------------------------------|>
     
-    private static String promptUserForString(String message) {
-        final String[] optionIngresed = { null };
+    public static String promptUserForString(String message) {
+        final String[] userInput = { null };
+        try {
+            do {
+                scanner = new Scanner(System.in);
+                System.out.format("%s: ", message);
+                userInput[0] = (scanner.hasNext()) ? scanner.nextLine() : "";
+            } while (userInput[0].isEmpty());
+        } catch (Exception e) { System.out.format("Error during data insertion: %s%n", e.getMessage()); }
 
+        return userInput[0];
+    }
+
+    // * ------------------------------------------------------------------------------|>
+    
+    public static Integer promptUserForInteger(String message) {
+        final Integer[] userInput = { null };
         try {
             scanner = new Scanner(System.in);
             do {
                 System.out.format("%s: ", message);
-                optionIngresed[0] = (scanner.hasNext()) ? scanner.next() : "";
-            } while (optionIngresed[0].isEmpty());
-        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
-
-        return optionIngresed[0];
+                userInput[0] = (scanner.hasNextInt()) ? scanner.nextInt() : 0;
+            } while (userInput[0] <= 0);
+        } catch (Exception e) { System.out.format("Error during data insertion: %s%n", e.getMessage()); }
+        
+        return userInput[0];
     }
-    
+
     // * ------------------------------------------------------------------------------|>
 
-    private static Integer promptUserForInteger(String message) {
-        final Integer[] optionIngresed = { 0 };
-    
+    public static Double promptUserForDouble(String message) {
+        final Double[] userInput = { null };
         try {
             scanner = new Scanner(System.in);
             do {
                 System.out.format("%s: ", message);
-                optionIngresed[0] = (scanner.hasNext()) ? scanner.nextInt() : 0;
-            } while (optionIngresed[0] <= 0);
-        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
-    
-        return optionIngresed[0];
+                userInput[0] = (scanner.hasNextDouble()) ? scanner.nextDouble() : null;
+                if (userInput[0] != null && userInput[0] <= 0.0) {
+                    userInput[0] = null;
+                }
+            } while (userInput[0] == null);
+        } catch (Exception e) { System.out.format("Error during insertion: %s%n", e.getMessage()); }
+        return userInput[0];
     }
 
     // ! --------------------------------------------------------------------------------------------------------------------------|>

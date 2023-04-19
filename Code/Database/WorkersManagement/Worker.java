@@ -2,6 +2,16 @@ package Code.Database.WorkersManagement;
 
 import java.util.Scanner;
 
+// TODO 
+
+/*
+ * > Take all the prompts from the 'App' class, make'em static and public so in case of Taking an UserInput, just call them
+ * > Create the UPDATE Method using the SELECT Method
+ *     If the request throws more than one condicence (ArrayList.size() > 1) then asks the User, which one want us to modify
+ *     If no, just create a new Worker() Object and send it to the database (WITH AND UPDATE QUERY)  
+ * 
+ */
+
 public class Worker {
     private String companyName;
     private String NIT;
@@ -39,63 +49,16 @@ public class Worker {
     public Worker() {
         App.printlnInConsole("-", 30);
 
-        this.companyName = promptUserForString("Enter the name of your company");
-        this.NIT = promptUserForString("Enter the NIT (Tax Identification Number) for the worker");
-        this.workerName = promptUserForString("Enter your name");
-        this.hoursOfWork = promptUserForInteger("Enter the number of hours worked this month: ");
-        this.workerAge = promptUserForInteger("Enter your age");
-        this.baseSalary = promptUserForDouble("Enter your base salary (per hour)");
+        this.companyName = App.promptUserForString("Enter the name of your company");
+        this.NIT = App.promptUserForString("Enter the NIT (Tax Identification Number) for the worker");
+        this.workerName = App.promptUserForString("Enter your name");
+        this.hoursOfWork = App.promptUserForInteger("Enter the number of hours worked this month: ");
+        this.workerAge = App.promptUserForInteger("Enter your age");
+        this.baseSalary = App.promptUserForDouble("Enter your base salary (per hour)");
 
         this.calculateTotalSalary();
 
         App.logFile(String.format("New user created [ %s ]", this.workerName));
-    }
-
-    // ! -----------------------------------------------------------------------------------------------------|>
-
-    private String promptUserForString(String message) {
-        final String[] userInput = { null };
-        try {
-            do {
-                scanner = new Scanner(System.in);
-                System.out.format("%s: ", message);
-                userInput[0] = (scanner.hasNext()) ? scanner.nextLine() : "";
-            } while (userInput[0].isEmpty());
-        } catch (Exception e) { System.out.format("Error during data insertion: %s%n", e.getMessage()); }
-
-        return userInput[0];
-    }
-
-    // ! -----------------------------------------------------------------------------------------------------|>
-
-    private Integer promptUserForInteger(String message) {
-        final Integer[] userInput = { null };
-        try {
-            scanner = new Scanner(System.in);
-            do {
-                System.out.format("%s: ", message);
-                userInput[0] = (scanner.hasNextInt()) ? scanner.nextInt() : 0;
-            } while (userInput[0] <= 0);
-        } catch (Exception e) { System.out.format("Error during data insertion: %s%n", e.getMessage()); }
-
-        return userInput[0];
-    }
-    
-    // ! -----------------------------------------------------------------------------------------------------|>
-
-    private Double promptUserForDouble(String message) {
-        final Double[] userInput = { null };
-        try {
-            scanner = new Scanner(System.in);
-            do {
-                System.out.format("%s: ", message);
-                userInput[0] = (scanner.hasNextDouble()) ? scanner.nextDouble() : null;
-                if (userInput[0] != null && userInput[0] <= 0.0) {
-                    userInput[0] = null;
-                }
-            } while (userInput[0] == null);
-        } catch (Exception e) { System.out.format("Error during insertion: %s%n", e.getMessage()); }
-        return userInput[0];
     }
 
     // ! -----------------------------------------------------------------------------------------------------|>
