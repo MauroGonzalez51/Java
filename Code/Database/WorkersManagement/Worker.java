@@ -13,16 +13,25 @@ public class Worker {
 
     Scanner scanner = null;
 
+    private Integer ID;
+
     // ! -----------------------------------------------------------------------------------------------------|>
 
     public Worker(String companyName, String NIT, String workerName, Integer hoursOfWork, Integer workerAge,
-            Double baseSalary) {
+            Double baseSalary, Double totalSalary, Integer ID) {
         this.companyName = companyName;
         this.NIT = NIT;
         this.workerName = workerName;
         this.hoursOfWork = hoursOfWork;
         this.workerAge = workerAge;
         this.baseSalary = baseSalary;
+
+        // this.calculateTotalSalary();
+
+        this.totalSalary = totalSalary;
+        this.ID = ID;
+    
+        App.logFile(String.format("Getting info of [ %s ]", this.workerName));
     }
 
     // ! -----------------------------------------------------------------------------------------------------|>
@@ -98,6 +107,23 @@ public class Worker {
 
     // ! -----------------------------------------------------------------------------------------------------|>
 
+    public void printInfo() {
+        App.printlnInConsole("-", 30);
+
+        try {
+            System.out.format("ID: %s%n", this.ID);
+            System.out.format("Company Name: %s%n", this.companyName);
+            System.out.format("NIT: %s%n", this.NIT);
+            System.out.format("Worker Name: %s%n", this.workerName);
+            System.out.format("Worker Age: %d%n", this.workerAge);
+            System.out.format("Base Salary: %f%n", this.baseSalary);
+            System.out.format("Total Salary: %f%n", this.totalSalary);
+
+        } catch (Exception e) { System.out.format("Error during printing the info: %s%n", e.getMessage()); }
+    }
+
+    // ! -----------------------------------------------------------------------------------------------------|>
+
     public String getCompanyName() { return this.companyName; }
 
     public String getNIT() { return this.NIT; }
@@ -126,5 +152,11 @@ public class Worker {
     
     public void setBaseSalary(Double baseSalary) { this.baseSalary = baseSalary; }
     
+    // ! -----------------------------------------------------------------------------------------------------|>
+    
+    public Integer getID() { return this.ID; }
+    
+    public void setID(Integer id) { this.ID = id; }
+
     // ! -----------------------------------------------------------------------------------------------------|>
 }

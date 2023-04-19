@@ -3,6 +3,7 @@ package Code.Database.WorkersManagement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -95,4 +96,49 @@ public class SQLConnection {
     }
 
     // ! -----------------------------------------------------------------------------------------------------|>
+
+    public ArrayList <Worker> searchByParam(Integer IDToSearch) {
+        ArrayList <Worker> resultArrayList = new ArrayList <>();
+
+        String query = "SELECT * FROM workers WHERE ID = ?";
+
+        try {
+            Connection connection = this.setConnection();
+
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            statement.setInt(1, IDToSearch);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                resultArrayList.add(new Worker(
+                    // * -----------------------------------------------------|>
+
+                    resultSet.getString("companyName"),
+                    resultSet.getString("NIT"),
+                    resultSet.getString("workerName"),
+                    
+                    // * -----------------------------------------------------|>
+
+                    resultSet.getInt("hoursOfWork"),
+                    resultSet.getInt("workerAge"),
+                    
+                    // * -----------------------------------------------------|>
+
+                    resultSet.getDouble("baseSalary"),
+                    resultSet.getDouble("totalSalary"),
+                    
+                    // * -----------------------------------------------------|>
+                    
+                    resultSet.getInt("ID")
+
+                    // * -----------------------------------------------------|>
+                ));
+            }
+
+        } catch (SQLException e) { System.out.format("Error during getting the Info: %s%n", e.getMessage()); }
+
+        return resultArrayList;
+    }
 }

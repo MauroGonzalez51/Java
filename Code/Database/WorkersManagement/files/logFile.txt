@@ -3,3 +3,11 @@
 [ INFO ] [ 2023-04-18 ] [ 13-3-33 ] Session started
 [ INFO ] [ 2023-04-18 ] [ 13-3-50 ] New user created [ Jose ]
 [ INFO ] [ 2023-04-18 ] [ 13-3-50 ] Successfully inserted into database [ Jose ]
+
+--------------------------------------------------------------------------------
+[ INFO ] [ 2023-04-19 ] [ 17-40-5 ] Session started
+[ INFO ] [ 2023-04-19 ] [ 17-40-18 ] Getting info of [ MauroXD ]
+
+--------------------------------------------------------------------------------
+[ INFO ] [ 2023-04-19 ] [ 17-46-14 ] Session started
+[ INFO ] [ 2023-04-19 ] [ 17-46-20 ] Getting info of [ Jose ]

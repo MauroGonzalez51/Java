@@ -79,20 +79,14 @@ public class App {
     private static String mainMenu() {
         final String[] optionIngresed = { null };
         ArrayList<String> listOptions = new ArrayList<>(
-            Arrays.asList("Add a new Worker", "Update a previous register", "Delete a Worker", "Exit"
+            Arrays.asList("Add a new Worker", "Search by ID","Update a previous register", "Delete a Worker", "Exit"
             ));
             
         listOptions.forEach((option) -> {
             System.out.format("%s) %s%n", listOptions.indexOf(option) + 1, option);
         });
         
-        try {
-            scanner = new Scanner(System.in);
-            do {
-                System.out.format("Enter an option: ");
-                optionIngresed[0] = (scanner.hasNext()) ? scanner.next() : "";
-            } while (optionIngresed[0].isEmpty());
-        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
+        optionIngresed[0] = promptUserForString("Enter an option");
 
         return optionIngresed[0];
     }
@@ -103,6 +97,11 @@ public class App {
         switch (optionIngresed) {
             case "1": {
                 addWorker();
+                break;
+            }
+
+            case "2": {
+                searchByParameters();
                 break;
             }
             
@@ -126,12 +125,57 @@ public class App {
             SQLConnection sqlConnection = new SQLConnection("javatesting", "root", "", "localhost", "3306");
             Worker worker = new Worker();
             if (sqlConnection.insertUsers(new ArrayList <Worker> (Arrays.asList(worker))))
-                logFile(String.format("Successfully inserted into database [ %s ]", worker.getWorkerName()));
+            logFile(String.format("Successfully inserted into database [ %s ]", worker.getWorkerName()));
         } catch (Exception e) { System.out.format("Error during creating a new Worker: %s%n", e.getMessage()); }
     }
     
-    // ! --------------------------------------------------------------------------------------------------------------------------|>
+    // * ------------------------------------------------------------------------------|>
 
+    private static void searchByParameters() {
+        try {
+            SQLConnection sqlConnection = new SQLConnection("javatesting", "root", "", "localhost", "3306");
+            
+            sqlConnection.searchByParam(promptUserForInteger("Enter the ID")).forEach((worker) -> {
+                worker.printInfo();
+            });
+
+        } catch (Exception e) { System.out.format("Error during gattering the info: %s%n", e.getMessage()); }
+    }
+    
+    // ! --------------------------------------------------------------------------------------------------------------------------|>
+    
+    private static String promptUserForString(String message) {
+        final String[] optionIngresed = { null };
+
+        try {
+            scanner = new Scanner(System.in);
+            do {
+                System.out.format("%s: ", message);
+                optionIngresed[0] = (scanner.hasNext()) ? scanner.next() : "";
+            } while (optionIngresed[0].isEmpty());
+        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
+
+        return optionIngresed[0];
+    }
+    
+    // * ------------------------------------------------------------------------------|>
+
+    private static Integer promptUserForInteger(String message) {
+        final Integer[] optionIngresed = { 0 };
+    
+        try {
+            scanner = new Scanner(System.in);
+            do {
+                System.out.format("%s: ", message);
+                optionIngresed[0] = (scanner.hasNext()) ? scanner.nextInt() : 0;
+            } while (optionIngresed[0] <= 0);
+        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
+    
+        return optionIngresed[0];
+    }
+
+    // ! --------------------------------------------------------------------------------------------------------------------------|>
+    
     public static void main(String[] args) {
         logFile();
         mainMenuLoop();
