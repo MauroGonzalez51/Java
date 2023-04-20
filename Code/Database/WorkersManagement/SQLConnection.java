@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SQLConnection {
     // ! ClassAttributes ----------|>
@@ -140,5 +141,51 @@ public class SQLConnection {
         } catch (SQLException e) { System.out.format("Error during getting the Info: %s%n", e.getMessage()); }
 
         return resultArrayList;
+    }
+
+    public HashMap <Boolean, Integer> updateInDatabase(Integer IDToModify, Worker worker) {
+        HashMap <Boolean, Integer> resultHashMap = new HashMap <>();
+
+        String query = "UPDATE workers SET companyName = ?, NIT = ?, workerName = ?, hoursOfWork = ?, workerAge = ?, baseSalary = ?, totalSalary = ? WHERE ID = ?";
+
+        try {
+            Connection connection = this.setConnection();
+
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // * -----------------------------------------------------|>
+            
+            statement.setString(1, worker.getCompanyName());
+            statement.setString(2, worker.getNIT());
+            statement.setString(3, worker.getWorkerName());
+            
+            // * -----------------------------------------------------|>
+            
+            statement.setInt(4, worker.getHoursOfWork());
+            statement.setInt(5, worker.getWorkerAge());
+            
+            // * -----------------------------------------------------|>
+            
+            statement.setDouble(6, worker.getBaseSalary());
+            statement.setDouble(7, worker.getTotalSalary());
+
+            // * -----------------------------------------------------|>
+            
+            statement.setInt(8, IDToModify);
+            
+            // * -----------------------------------------------------|>
+            
+            Integer rowsUpdated = statement.executeUpdate();
+            
+            resultHashMap.put(true, rowsUpdated);
+            
+            // * -----------------------------------------------------|>
+            
+            App.logFile(String.format("Updating values in database [ ROWS: %d ]", rowsUpdated));
+
+            // * -----------------------------------------------------|>
+        } catch (SQLException e) { System.out.format("Error during updating values: %s%n"); }
+
+        return resultHashMap;
     }
 }

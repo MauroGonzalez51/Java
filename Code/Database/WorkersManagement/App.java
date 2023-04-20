@@ -104,6 +104,11 @@ public class App {
                 searchByParameters();
                 break;
             }
+
+            case "3": {
+                updateInDatabase();
+                break;
+            }
             
             default: System.exit(0);
         }
@@ -135,11 +140,45 @@ public class App {
         try {
             SQLConnection sqlConnection = new SQLConnection("javatesting", "root", "", "localhost", "3306");
             
-            sqlConnection.searchByParam(promptUserForInteger("Enter the ID")).forEach((worker) -> {
-                worker.printInfo();
-            });
+            ArrayList <Worker> resultArrayListFromSearch = sqlConnection.searchByParam(promptUserForInteger("Enter the ID"));
 
+            if (resultArrayListFromSearch.size() > 0) {
+                resultArrayListFromSearch.forEach((worker) -> {
+                    worker.printInfo();
+                });
+            } else { System.out.format("There's no data in the database for this worker"); }
+            
+            
         } catch (Exception e) { System.out.format("Error during gattering the info: %s%n", e.getMessage()); }
+    }
+
+    // * ------------------------------------------------------------------------------|>
+    
+    private static void updateInDatabase() {
+        try {
+            SQLConnection sqlConnection = new SQLConnection("javatesting", "root", "", "localhost", "3306");
+            
+            final Integer[] idToModify = { promptUserForInteger("Enter the ID from the user to modify") };
+
+            ArrayList <Worker> resultArrayListFromSearch = sqlConnection.searchByParam(idToModify[0]);
+
+            if (resultArrayListFromSearch.size() > 0) {
+                resultArrayListFromSearch.forEach((worker) -> {
+                    worker.printInfo();
+                });
+
+                if (promptUserForString("Wanna modify them?").equalsIgnoreCase("Yes")) {
+                    Worker worker = new Worker();
+
+                    sqlConnection.updateInDatabase(idToModify[0], worker).forEach((operation, rows) -> {
+                        System.out.format("Success: %b%n", operation);
+                        System.out.format("Rows updated: %d%n", rows);
+                    });
+                }
+
+            } else { System.out.format("There's no data in the database for this worker"); }
+            
+        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
     }
     
     // ! --------------------------------------------------------------------------------------------------------------------------|>
