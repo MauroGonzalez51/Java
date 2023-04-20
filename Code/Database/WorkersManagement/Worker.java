@@ -2,16 +2,6 @@ package Code.Database.WorkersManagement;
 
 import java.util.Scanner;
 
-// TODO 
-
-/*
- * > Take all the prompts from the 'App' class, make'em static and public so in case of Taking an UserInput, just call them
- * > Create the UPDATE Method using the SELECT Method
- *     If the request throws more than one condicence (ArrayList.size() > 1) then asks the User, which one want us to modify
- *     If no, just create a new Worker() Object and send it to the database (WITH AND UPDATE QUERY)  
- * 
- */
-
 public class Worker {
     private String companyName;
     private String NIT;
