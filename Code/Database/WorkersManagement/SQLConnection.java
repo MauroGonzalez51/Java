@@ -177,7 +177,8 @@ public class SQLConnection {
             
             Integer rowsUpdated = statement.executeUpdate();
             
-            resultHashMap.put(true, rowsUpdated);
+            if (rowsUpdated > 0)
+                resultHashMap.put(true, rowsUpdated);
             
             // * -----------------------------------------------------|>
             
@@ -185,7 +186,35 @@ public class SQLConnection {
 
             // * -----------------------------------------------------|>
         } catch (SQLException e) { System.out.format("Error during updating values: %s%n"); }
-
+        
         return resultHashMap;
+    }
+    
+    public Boolean deleteInDatabase(Integer idToDelete) {
+        final Boolean[] toReturn = { false };
+        
+        String query = "DELETE FROM workers WHERE ID = ?";
+        
+        try {
+            // * -----------------------------------------------------|>
+
+            Connection connection = this.setConnection();
+            
+            PreparedStatement statement = connection.prepareStatement(query);
+
+            // * -----------------------------------------------------|>
+            
+            statement.setInt(1, idToDelete);
+            
+            Integer rowsUpdated = statement.executeUpdate();
+            
+            if (rowsUpdated > 0)
+            toReturn[0] = true;
+            
+            // * -----------------------------------------------------|>
+
+        } catch (SQLException e) { System.out.format("Error during deleting values: %s%n", e.getMessage()); }
+
+        return toReturn[0];
     }
 }

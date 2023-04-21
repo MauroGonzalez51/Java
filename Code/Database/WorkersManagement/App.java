@@ -109,6 +109,11 @@ public class App {
                 updateInDatabase();
                 break;
             }
+
+            case "4": {
+                deleteInDatabase();
+                break;
+            }
             
             default: System.exit(0);
         }
@@ -178,6 +183,24 @@ public class App {
 
             } else { System.out.format("There's no data in the database for this worker"); }
             
+        } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
+    }
+
+    // * ------------------------------------------------------------------------------|>
+
+    private static void deleteInDatabase() {
+        try {
+            SQLConnection sqlConnection = new SQLConnection("javatesting", "root", "", "localhost", "3306");
+
+            Integer idToDelete = promptUserForInteger("Enter the ID to delete");
+
+            if (promptUserForString("Are you sure?").equalsIgnoreCase("Yes")) {
+                if (sqlConnection.deleteInDatabase(idToDelete)) {
+                    System.out.format("[ Worker ] deleted successfully%n");
+                    logFile(String.format("Worker deleted [ %d ]", idToDelete));
+                }
+            }
+
         } catch (Exception e) { System.out.format("Error during taking input: %s%n", e.getMessage()); }
     }
     

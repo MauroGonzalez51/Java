@@ -44,3 +44,9 @@
 [ INFO ] [ 2023-04-20 ] [ 14-56-52 ] Session started
 [ INFO ] [ 2023-04-20 ] [ 14-56-56 ] Getting info of [ MauroXD ]
 [ INFO ] [ 2023-04-20 ] [ 14-57-9 ] New user created [ Mauro ]
+
+--------------------------------------------------------------------------------
+[ INFO ] [ 2023-04-21 ] [ 17-47-59 ] Session started
+[ INFO ] [ 2023-04-21 ] [ 17-48-5 ] Worker deleted [ 3 ]
+[ INFO ] [ 2023-04-21 ] [ 17-48-36 ] Getting info of [ Jose ]
+[ INFO ] [ 2023-04-21 ] [ 17-48-45 ] Worker deleted [ 4 ]

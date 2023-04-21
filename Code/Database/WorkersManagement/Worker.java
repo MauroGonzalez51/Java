@@ -1,7 +1,5 @@
 package Code.Database.WorkersManagement;
 
-import java.util.Scanner;
-
 public class Worker {
     private String companyName;
     private String NIT;
@@ -10,8 +8,6 @@ public class Worker {
     private Integer workerAge;
     private Double baseSalary;
     private Double totalSalary;
-
-    Scanner scanner = null;
 
     private Integer ID;
 
