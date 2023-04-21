@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
@@ -94,29 +96,16 @@ public class App {
     // ! --------------------------------------------------------------------------------------------------------------------------|>
     
     private static void handleCase(String optionIngresed) {
-        switch (optionIngresed) {
-            case "1": {
-                addWorker();
-                break;
-            }
 
-            case "2": {
-                searchByParameters();
-                break;
-            }
+        Map <String, Runnable> options = new HashMap<>() {{
+            put("1", () -> addWorker());
+            put("2", () -> searchByParameters());
+            put("3", () -> updateInDatabase());
+            put("4", () -> deleteInDatabase());
+            put("default", () -> System.exit(0));
+        }};
 
-            case "3": {
-                updateInDatabase();
-                break;
-            }
-
-            case "4": {
-                deleteInDatabase();
-                break;
-            }
-            
-            default: System.exit(0);
-        }
+        options.getOrDefault(optionIngresed, options.get("default")).run();
     }
     
     // ! --------------------------------------------------------------------------------------------------------------------------|>
