@@ -1,6 +1,6 @@
 package Code.InterfazGrafica.JLabel;
 
-public class Main {
+public class App {
     public static void main(String[] args) {
         Window window = new Window();
         window.setVisible(true);
