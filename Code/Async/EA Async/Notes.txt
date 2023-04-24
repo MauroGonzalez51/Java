@@ -1,0 +1,6 @@
+Method to write async developed by Electronic Arts (Surprisinly it's free xD)
+
+Requieres a dependece (file) in .xml
+Let uses the async await() function
+
+// WHY ALL THE NOTES (INFO) IS ASYNC BUT IN JS D: !?
