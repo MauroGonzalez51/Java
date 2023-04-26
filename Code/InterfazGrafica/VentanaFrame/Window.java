@@ -1,4 +1,4 @@
-package Code.InterfazGrafica.VentanaFrame;
+
 
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
