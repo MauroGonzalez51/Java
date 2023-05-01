@@ -56,8 +56,8 @@ public class RegisterStudentScene {
     // ! -------------------------------------------------------------------------------------------------------------|>
 
     /*
-     * Method to clear all the inputs in the Scene 
-     * EventListener > on action 
+     * Method to redirect the user to a new scene
+     * 
      */
 
     @FXML

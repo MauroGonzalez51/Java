@@ -10,7 +10,16 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class SQLConnection {
-    // ! ClassAttributes ----------|>
+
+    // ! -----------------------------------------------------------------------------------------------------|>
+
+    /*
+     * ClassAttributes
+     * 
+     * In order to connect to the database
+     * 
+     */
+
     private String databaseName;
 
     private String userName;
@@ -27,6 +36,13 @@ public class SQLConnection {
 
     // ! -----------------------------------------------------------------------------------------------------|>
 
+    /*
+     * Constructor
+     * 
+     * It is required the databaseName, userName, password, host and the port in order to connect
+     * That's why all these fields are asked via constructor
+     */
+
     public SQLConnection(String databaseName, String userName, String password, String host, String databasePort) {
         this.databaseName = databaseName;
         this.userName = userName;
@@ -34,7 +50,12 @@ public class SQLConnection {
         this.host = host;
         this.databasePort = databasePort;
 
-        // * Formating the url to contain the host:port
+        /*
+         * Formating the url to contain the host:port
+         * URL to connecto to the database
+         * 
+         */
+
         this.url = String.format("jdbc:mysql://%s:%s/", this.host, this.databasePort);
     }
 
@@ -223,47 +244,69 @@ public class SQLConnection {
     
     // ! -----------------------------------------------------------------------------------------------------|>
 
-    // public HashMap<String, Double> excelentPercentajePerSubject() {
-    //     HashMap<String, Double> percentajePerSubject = new HashMap<>() {{
-    //         put("informatica", 0.0);
-    //         put("fisica", 0.0);
-    //         put("quimica", 0.0);
-    //     }};
-    
-    //     Integer totalSixeOfStudents = this.getAllStudentsByQuery("SELECT * FROM student").size();
-    
-    //     percentajePerSubject.keySet().forEach((subject) -> {
-    //         ArrayList<Student> totalStudentsWithExcelent = this.getAllStudentsByQuery(String.format("SELECT * FROM student WHERE grades_%s > 90 AND grades_%s <= 100", subject, subject));
-    //         percentajePerSubject.put(subject, (totalStudentsWithExcelent.size() / (double) totalSixeOfStudents) * 100.0);
-    //     });
-    
-    //     return percentajePerSubject;
-    // }
-
-    // ! -----------------------------------------------------------------------------------------------------|>
+    /*
+     * Gets the percentaje of students in a given range of values
+     * Takes to Arguments (Integer minRange, Integer maxRange)
+     * 
+     */
 
     public HashMap<String, Double> percentajeByRange(Integer minRange, Integer maxRange) {
+        /*
+         * Creates a new HashMap <String, Double> to store the name of the subject and the percentaje of it
+         * 
+         */
+
         HashMap<String, Double> percentajePerSubject = new HashMap<>() {{
             put("informatica", 0.0);
             put("fisica", 0.0);
             put("quimica", 0.0);
         }};
-    
+        
+        // * Executes a query to get how many students are in the database
         Integer totalSixeOfStudents = this.getAllStudentsByQuery("SELECT * FROM student").size();
+
+        /*
+         * Small ternay operator to verify the query
+         * If the minRange == 0 => then the lowerRange of the query changes, from '>' to '>='
+         * 
+         */
 
         String query = (minRange == 0) ? 
             "SELECT * FROM student WHERE grades_%s >= %d AND grades_%s <= %d":
             "SELECT * FROM student WHERE grades_%s > %d AND grades_%s <= %d";
-    
+        
+        /*
+         * Iterates over all the 'Keys' of (HashMap) percentajePerSubject
+         * 
+         */
+        
         percentajePerSubject.keySet().forEach((subject) -> {
-            ArrayList<Student> totalStudentsWithExcelent = this.getAllStudentsByQuery(String.format(query, subject, minRange, subject, maxRange));
-            percentajePerSubject.put(subject, (totalStudentsWithExcelent.size() / (double) totalSixeOfStudents) * 100.0);
+            /*
+             * Executes a query forEach(() -> {}) subject in percentajePerSubject
+             * Formats the string with the values in each position
+             * Stores into a new ArrayList
+             * 
+             * With the .put() Method adds the value with his respective subject name
+             * 
+             * Disclaimer: The keys must be unique, when using the .put() Method, if the key already exists
+             *      it will be replace with the new pair of value as well
+             * 
+             */
+            ArrayList<Student> totalStudentsInRange = this.getAllStudentsByQuery(String.format(query, subject, minRange, subject, maxRange));
+            percentajePerSubject.put(subject, (totalStudentsInRange.size() / (double) totalSixeOfStudents) * 100.0);
         });
     
         return percentajePerSubject;
     }
     
     // ! -----------------------------------------------------------------------------------------------------|>
+
+    /*
+     * Connects to the database and executes a query
+     * Gets all the request, pack'em into an ArrayList,
+     * And returns it
+     * 
+     */
 
     private ArrayList <Student> getAllStudentsByQuery(String query) {
         ArrayList <Student> resultArrayList = new ArrayList <>();
