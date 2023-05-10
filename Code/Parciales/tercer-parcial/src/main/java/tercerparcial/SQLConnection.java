@@ -226,7 +226,10 @@ public class SQLConnection {
     }
 
     // * ------------------------------------------------------------------------------------------|>
-
+    
+    // TODO
+    // * This method can also be changed
+    
     private ArrayList <Double> averagePerSubject() {
         ArrayList <Student> resultArrayList = this.getAllStudentsByQuery("SELECT * FROM student");
 
