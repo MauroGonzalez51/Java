@@ -209,6 +209,9 @@ public class SQLConnection {
 
     // ! -----------------------------------------------------------------------------------------------------|>
     
+    // TODO
+    // * This method can be implemented better by using the SQL.AVG() function [ ... ]
+    
     public ArrayList <String> averagePerSubjectFormatted() {
         ArrayList<String> subjects = new ArrayList<>(Arrays.asList("Informatica", "Fisica", "Quimica"));
         ArrayList<Double> resultAverages = this.averagePerSubject();
