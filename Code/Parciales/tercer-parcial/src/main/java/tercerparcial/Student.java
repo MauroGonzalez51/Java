@@ -1,12 +1,30 @@
 package tercerparcial;
 
+/*
+ * SkeletonClass for all the Student(s)
+ * 
+ */
+
 public class Student {
+    /*
+     * ClassAttibutes ----------------------------------------------------------------|>
+     */
+
     private Integer ID;
     private String name;
     private String gender;
     private Double gradesInformatica;
     private Double gradesFisica;
     private Double gradesQuimica;
+
+    /*
+     * Constructor > Used when gathering the info from the database
+     * 
+     * When getting the info, it comes as String -> changeType
+     * 
+     * Integer.parseInt(new String())
+     * Double.parseDouble(new String())
+     */
 
     public Student(String ID, String name, String gender,String gradesInformatica, String gradesFisica, 
             String gradesQuimica) {
@@ -20,7 +38,11 @@ public class Student {
         this.gradesQuimica = Double.parseDouble(gradesQuimica);
     }
 
-    
+    /*
+     * Constructor > Used when creating a new Student from the GUI
+     * 
+     * No need to change the dataType
+     */
 
     public Student(Integer iD, String name, String gender, Double gradesInformatica, Double gradesFisica,
             Double gradesQuimica) {
@@ -34,7 +56,10 @@ public class Student {
         this.gradesQuimica = gradesQuimica;
     }
 
-
+    /*
+     * Getters and Setters for the ClassAttributes -------------------------------------------------------------|>
+     * 
+     */
 
     public Integer getID() { return this.ID; }
 
@@ -59,5 +84,4 @@ public class Student {
     public Double getGradesQuimica() { return this.gradesQuimica; }
 
     public void setGradesQuimica(Double gradesQuimica) { this.gradesQuimica = gradesQuimica; }
-
 }
