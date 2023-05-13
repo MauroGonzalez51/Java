@@ -61,6 +61,12 @@ public class SQLConnection {
 
     // ! -----------------------------------------------------------------------------------------------------|>
 
+    /*
+     * Method to setup the connection to the database
+     * 
+     * Using the DriverManager.getConnection();
+     */
+
     public Connection setConnection() {
         try {
             Class.forName(this.driver);
@@ -74,12 +80,23 @@ public class SQLConnection {
     
     // ! -----------------------------------------------------------------------------------------------------|>
     
+    /*
+     * Method to insert a new Register into teacher
+     * 
+     * Takes a @param <Object> Teacher
+     * 
+     */
+
     public Boolean insertIntoTeachers(Teacher teacher) {
         final Boolean[] success = { false };
         
         String query = "INSERT INTO teacher (username, password) VALUES (?, ?)";
 
         try {
+            /*
+             * Setting the connection, and preparing the statement
+             * 
+             */
             Connection connection = this.setConnection();
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -92,6 +109,11 @@ public class SQLConnection {
 
             Integer rowsAfected = statement.executeUpdate();
 
+            /*
+             * If rowsAffected >= 1 means that the insert query was successful
+             * 
+             */
+
             if (rowsAfected >= 1) success[0] = true;
 
             statement.close();
@@ -102,12 +124,24 @@ public class SQLConnection {
         return success[0];
     }
 
+    /*
+     * Method to insert a new Register into student
+     * 
+     * Takes a @param <Object> Student
+     * 
+     */
+
     public Boolean insertIntoStudents(Student student) {
         final Boolean[] success = { false };
 
         String query = "INSERT INTO student (ID, name, gender, grades_informatica, grades_fisica, grades_quimica) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
+            /*
+             * Setting the connection, and preparing the statement
+             * 
+             */
+
             Connection connection = this.setConnection();
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -130,6 +164,11 @@ public class SQLConnection {
 
             Integer rowsAfected = statement.executeUpdate();
 
+            /*
+             * If rowsAffected >= 1 means that the insert query was successful
+             * 
+             */
+
             if (rowsAfected >= 1) success[0] = true;
 
             statement.close();
@@ -142,12 +181,28 @@ public class SQLConnection {
 
     // ! -----------------------------------------------------------------------------------------------------|>
     
+    /*
+     * Method to validate the Login <Teacher>
+     * 
+     * Connects to the database and searchs based on two params
+     * @param userName <String>, @param password <String>
+     * 
+     * -> The password in the database are encrypted so before getting the password here, must go to
+     * -> Class.PasswordEncrypter.encryptHashSHA256(String password)
+     * 
+     */
+
     public ArrayList <Teacher> searchByParam(String userName, String password) {
         ArrayList <Teacher> resultArrayList = new ArrayList <>();
 
         String query = "SELECT * FROM teacher WHERE username = ? AND password = ?";
 
         try {
+            /*
+             * Setting the connection, and preparing the statement
+             * 
+             */
+
             Connection connection = this.setConnection();
             PreparedStatement statement = connection.prepareStatement(query);
 
@@ -159,6 +214,12 @@ public class SQLConnection {
             // * ----------------------------------------|>
 
             ResultSet resultSet = statement.executeQuery();
+
+            /*
+             * Adding all the coincidences to an arrayList 
+             * 
+             * 
+             */
 
             while (resultSet.next()) {
                 resultArrayList.add(new Teacher(
@@ -175,6 +236,15 @@ public class SQLConnection {
     }
 
     // ! -----------------------------------------------------------------------------------------------------|>
+
+    /*
+     * Method to validate the username <Teacher>
+     * 
+     * OverrittenMethod -> Does the same as this.searchByParam(String username, String password)
+     * 
+     * Instead this one only searchs based on the username
+     * 
+     */
 
     public ArrayList <Teacher> searchByParam(String userName) {
         ArrayList <Teacher> resultArrayList = new ArrayList <>();
@@ -209,45 +279,74 @@ public class SQLConnection {
 
     // ! -----------------------------------------------------------------------------------------------------|>
     
-    // TODO
-    // * This method can be implemented better by using the SQL.AVG() function [ ... ]
-    
-    public ArrayList <String> averagePerSubjectFormatted() {
-        ArrayList<String> subjects = new ArrayList<>(Arrays.asList("Informatica", "Fisica", "Quimica"));
-        ArrayList<Double> resultAverages = this.averagePerSubject();
+    /*
+     * Method to get the AveragesPerSubject with a String.format
+     * 
+     * Return: "Asignatura [%subject%] [PROMEDIO]: %float%"
+     * 
+     */
 
-        ArrayList<String> formattedResults = new ArrayList<>();
-        resultAverages.forEach((average) -> {
-            String formattedString = String.format("Asignatura [%s] [PROMEDIO]: %f", subjects.get(resultAverages.indexOf(average)), average);
-            formattedResults.add(formattedString);
+    public ArrayList <String> averagePerSubjectFormatted() {
+        /*
+         * Creates two template arrayList
+         * 
+         * 1) Saving all the subject's name
+         * 2) Storing the average of that subject (Initialized as empty)
+         * 
+         */
+        ArrayList<String> subjects = new ArrayList<>(Arrays.asList("Informatica", "Fisica", "Quimica"));
+        ArrayList <String> arrayListToReturn = new ArrayList <> ();
+
+        /*
+         * forEach(() -> {}) subject it will call the method this.getAverageOfSubject(String query)
+         * To get the value ...
+         * 
+         * Then adding it to the arrayList, just after formatting it
+         * 
+         */
+
+        subjects.forEach((subject) -> {
+            String query = String.format("SELECT AVG(grades_%s) from student", subject.toLowerCase());
+
+            arrayListToReturn.add(String.format("Asignatura [%s] [PROMEDIO]: %.3f", 
+                subject,
+                this.getAverageOfSubject(query)    
+            ));
         });
 
-        return formattedResults;
+
+        return arrayListToReturn;
     }
 
     // * ------------------------------------------------------------------------------------------|>
     
-    // TODO
-    // * This method can also be changed
-    
-    private ArrayList <Double> averagePerSubject() {
-        ArrayList <Student> resultArrayList = this.getAllStudentsByQuery("SELECT * FROM student");
+    /*
+     * Method to get the Average (Grades) per subject
+     * 
+     * Takes a @param query <String>
+     * 
+     * 
+     * -> The query must contain the SQL.AVG(field) in-build function
+     */
 
-        ArrayList <Double> arrayListToReturn = new ArrayList <>(Arrays.asList (0.0, 0.0, 0.0));
+    private Double getAverageOfSubject(String query) {
+        Double averageToReturn = 0.0;
 
-        resultArrayList.forEach((student) -> {
-            arrayListToReturn.set(0, arrayListToReturn.get(0) + student.getGradesInformatica());
-            arrayListToReturn.set(1, arrayListToReturn.get(1) + student.getGradesFisica());
-            arrayListToReturn.set(2, arrayListToReturn.get(2) + student.getGradesQuimica());
-        });
+        try {
+            Connection connection = this.setConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
 
-        arrayListToReturn.forEach((sumatory) -> {
-            arrayListToReturn.set(arrayListToReturn.indexOf(sumatory), sumatory / (double) resultArrayList.size());
-        });
-        
-        return arrayListToReturn;
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                averageToReturn = resultSet.getDouble(1);
+            }
+
+        } catch (Exception e) { e.printStackTrace(); }
+
+        return averageToReturn;
     }
-    
+
     // ! -----------------------------------------------------------------------------------------------------|>
 
     /*
